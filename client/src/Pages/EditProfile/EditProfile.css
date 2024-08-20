@@ -1,0 +1,111 @@
+.edit-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5; /* Using f0f2f5 color as in the previous styles */
+    background-color: wheat; /* Using wheat color as in the previous styles */
+}
+
+.edit-profile-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px; /* Adjusted to match the previous rounded corners */
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 
+                0px 3px 4px 0px rgb(0 0 0 / 14%), 
+                0px 1px 8px 0px rgb(0 0 0 / 12%); /* Matching shadow styles */
+    width: 700px;
+    /* max-width: 400px; */
+}
+
+.edit-profile-form h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 40px; /* Matching font size with previous styles */
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: 95%;
+    padding: 15px; /* Matching padding with previous input styles */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Matching border-radius with previous input styles */
+    background-color: #edf5f3; /* Matching background color with previous input styles */
+    font-size: 1rem;
+}
+
+.form-group input[type="file"] {
+
+    width: 95%;
+    padding: 15px; /* Matching padding with previous input styles */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Matching border-radius with previous input styles */
+   
+}
+#profileImagel{
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #3b3f46; /* Your desired background color */
+    color: white; /* Text color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for the button */
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+/* .custom-file-label:hover {
+    background-color: wheat; 
+} */
+
+.image-preview {
+    margin-top: 1rem;
+    margin-left: 34%;
+    margin-bottom: 1rem;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 50%;
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.update-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #3b3f46; 
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.update-btn:hover {
+    background-color: #223323;
+}
+
+.error-message {
+    color: rgb(255, 255, 255);
+    margin-bottom: 1rem;
+    text-align: center;
+    background-color: #f34646; /* Using the same error background color as before */
+    padding: 15px; /* Consistent padding with previous error message style */
+    border-radius: 10px; /* Consistent border-radius with previous styles */
+}
+.profileimage{
+    display: none;
+}

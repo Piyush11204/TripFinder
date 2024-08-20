@@ -1,0 +1,140 @@
+/* Container for the form */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main form container */
+.inner_container {
+    margin-top: 150px;
+    margin-bottom: 100px;
+    width: 700px;
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    border: 2px solid black;
+    background-color: white;
+}
+
+/* Right section styling */
+.form_right {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Form inner styling */
+.picnic_form_inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.picnic_form_inner h1 {
+    font-size: 36px;
+    margin-top: 0;
+    color: #3b3f46;
+}
+
+/* Input field styling */
+.input_field {
+    border: 2px solid #ccc;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    margin: 10px 0;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input_field:focus {
+    border-color: #3b3f46;
+    box-shadow: 0 0 5px rgba(59, 63, 70, 0.2);
+}
+
+.Lable {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Dropdown styling */
+.dropdown {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    appearance: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dropdown:focus {
+    border-color: #3b3f46;
+    box-shadow: 0 0 5px rgba(59, 63, 70, 0.2);
+}
+
+/* File input and image preview styling */
+.image-preview1 {
+    margin-top: 10px;
+    max-width: 200px;
+}
+
+.image-preview1 img {
+    height: 200px;
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+.black_btn {
+    border: none;
+    padding: 12px 0;
+    background-color: #3b3f46;
+    border-radius: 20px;
+    width: 180px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* Rating star styling */
+.rating_container {
+    margin-top: 20px;
+}
+
+.rating_stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star {
+    font-size: 30px;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    margin: 0 5px;
+}
+
+.star.filled {
+    color: #f5b301;
+}
+
+
+.subheading {
+    font-family: 'ethnocentric';
+}

@@ -1,0 +1,20 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.homepage {
+    padding: 20px;
+    background: wheat;
+    min-height: max-content;
+    box-sizing: border-box; 
+}
+.SubHeadline{
+    margin-top: 20px;
+    font-size: 45px;
+    font-family: "ethnocentric";
+    text-align: center;
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 10px 10px gray);
+
+}
