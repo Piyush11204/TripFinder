@@ -49,7 +49,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 
         const newLocation = new Location(locationData);
         const result = await newLocation.save();
-        res.status(201).send(result); // Send status 201 for created resource
+        res.status(201).send(result); 
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: 'Internal Server Error', error });

@@ -25,7 +25,7 @@ const AddLocation = () => {
     const stations = [
         'Churchgate', 'Mumbai CST', 'Dadar', 'Lokmanya Tilak', 'Andheri', 'Borivali', 
         'Kalyan', 'Thane', 'Mumbai LTT', 'Mumbai Dadar', 'Mumbai Bandra', 'Mumbai Kurla', 
-        'Mumbai Vile Parle', 'Boisar', 'Palghar', 'Kelve Road', 'Virar', 'Vasai Road',
+        'Mumbai Vile Parle', 'Boisar', 'Palghar', 'Kelve Road', 'Virar', 'Vasai Road','Dahanu'
     ];
 
     const locationTypes = ['Park', 'Beach', 'Forest', 'Temple', 'Mountain', 'Other','Water Park', 'Fort'];
