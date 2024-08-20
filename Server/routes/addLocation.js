@@ -19,7 +19,7 @@ const upload = multer({ storage: storage });
 const validateLocation = (data) => {
     const errors = [];
     if (!data.name) errors.push("Name is required");
-    if (!data.locationType || !['Park', 'Beach', 'Forest', 'Temple', 'Mountain', 'Other','Water Park', 'Fort'].includes(data.locationType)) errors.push("Valid location type is required");
+    if (!data.locationType || !['Park', 'Beach', 'Forest', 'Temple', 'Mountain', 'historical landmarks','Water Park', 'Fort'].includes(data.locationType)) errors.push("Valid location type is required");
     if (!data.station) errors.push("Station is required");
     if (!data.description) errors.push("Description is required");
     if (data.rating === undefined || data.rating < 1 || data.rating > 5) errors.push("Rating must be between 1 and 5");

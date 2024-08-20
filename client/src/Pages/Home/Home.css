@@ -3,18 +3,44 @@ html, body {
     padding: 0;
     height: 100%;
 }
+
 .homepage {
     padding: 20px;
     background: wheat;
     min-height: max-content;
     box-sizing: border-box; 
 }
-.SubHeadline{
+
+.SubHeadline {
     margin-top: 20px;
     font-size: 45px;
     font-family: "ethnocentric";
     text-align: center;
     margin-bottom: 20px;
     filter: drop-shadow(0px 10px 10px gray);
+}
 
+.slogan {
+    font-family: "Pacifico";
+    font-size: 42px;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.nameInSlogan {
+    color: #ff0000;
+}
+
+.SloganPart {
+    display: flex;
+    align-items: center;
+}
+
+.Sloganimg {
+    margin-right: 200px;
+    transition: transform 0.6s ease-in-out; /* Apply transition */
+}
+
+.Sloganimg:hover {
+    transform: rotate(25deg); /* Rotate on hover */
 }
