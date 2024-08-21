@@ -11,6 +11,7 @@ const SearchResult = ({ searchResults }) => {
                         <div key={index} className="search-result-item">
                             <img src={`http://localhost:8080/${result.image}`} alt={result.name} className="result-image" />
                             <div className="result-details">
+                                
                                 <h3>{result.name}</h3>
                                 <div className="result-rating">
                                     Rating: {result.rating} ⭐
