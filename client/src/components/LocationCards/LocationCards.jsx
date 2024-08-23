@@ -43,7 +43,7 @@ const LocationCards = () => {
     <div className="location-carousels">
       {Object.keys(groupedLocations).map((type) => (
         <div key={type} className="location-carousel">
-          <h2 className="carousel-title">{type}'s</h2>
+          <h2 className="carousel-title">🍂{type}'s</h2>
           <Carousel
             responsive={responsive}
             swipeable={true}

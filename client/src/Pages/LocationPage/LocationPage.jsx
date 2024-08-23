@@ -76,7 +76,12 @@ const LocationPage = () => {
           <section className="location-page-details">
             <p><strong>Type:</strong> {locationData.locationType || 'Not available'}</p>
             <p><strong>Nearby Station:</strong> {locationData.station || 'Not available'}</p>
-            <p><strong>Rating:</strong> {locationData.rating} ⭐</p>
+            <p>
+                  <strong>Rating:</strong>
+                  {' '.repeat(locationData.rating).split('').map((_, index) => (
+                    <span key={index}>⭐</span>
+                  ))}
+                </p>
             {locationData.additionalDetails && (
               <p><strong>Review:</strong> {locationData.additionalDetails}</p>
             )}

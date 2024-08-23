@@ -17,9 +17,11 @@ const Home = () => {
       //  infinite={true}
       //  autoPlay={false}
       />
+      <div className='container1'>
       <h1 className='SubHeadline'>Destinations You'll Love to Explore</h1>
+      </div>
       <div className="SloganPart">
-        <strong className='slogan'>"Explore captivating destinations, discover hidden gems, and embark on unforgettable adventures. With  <span className='nameInSlogan'>Trip Finder</span>, your next great journey is just a click away."Let us guide you to your dream getaway!</strong>
+        <strong className='slogan'>"Explore captivating destinations, discover hidden gems, and embark on unforgettable adventures. With  <span className='nameInSlogan'>Tripvana</span>, your next great journey is just a click away."Let us guide you to your dream getaway!</strong>
         <div className="Sloganimg">
           <img src={AdventureAwaits} alt="" />
         </div>
