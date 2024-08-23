@@ -49,16 +49,27 @@ const LocationCards = () => {
             swipeable={true}
             draggable={true}
             showDots={false}
-            infinite={false}
+            infinite={true}
             autoPlay={false}
           >
             {groupedLocations[type].map((location) => (
               <div key={location._id} className="location-item">
                 <h2 className='LocationName'>{location.name}</h2>
-                <img src={`http://localhost:8080/${location.image}`} alt={location.name} className="location-image" />
-                <p><strong>Type:</strong> {location.locationType}</p>
+
+                {/* Conditional image source handling */}
+                {location.image.startsWith('http') ? (
+                  <img src={location.image} alt={location.name} className="location-image" />
+                ) : (
+                  <img src={`http://localhost:8080/${location.image || location.image.url}`} alt={location.name} className="location-image" />
+                )}
+
                 <p><strong>Nearby Station:</strong> {location.station}</p>
-                <p><strong>Rating:</strong> {location.rating} ⭐</p>
+                <p>
+                  <strong>Rating:</strong>
+                  {' '.repeat(location.rating).split('').map((_, index) => (
+                    <span key={index}>⭐</span>
+                  ))}
+                </p>
                 {location.additionalDetails && <p className='forReview'><strong>Review:</strong> {location.additionalDetails}</p>}
                 <Link to={`/location/${location._id}`} state={{ location }} className='view-more-link'>
                   <button className='view-more'>View more</button>

@@ -5,7 +5,7 @@ import './LocationPage.css';
 const LocationPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const locationData = location.state?.location || {}; // Ensure locationData is defined
+  const locationData = location.state?.location || {};
 
   const [mapHeight, setMapHeight] = useState('450px');
 
@@ -14,21 +14,17 @@ const LocationPage = () => {
   };
 
   const handleAddToWishList = () => {
-    // Add the location ID to the wish list
-    const locationId = locationData.id; // Assuming locationData has an id field
+    const locationId = locationData._id;
     if (!locationId) {
       alert('Location ID is missing.');
       return;
     }
 
-    // Get the current wish list from local storage or initialize an empty array
     let wishList = JSON.parse(localStorage.getItem('wishList')) || [];
 
-    // Check if the item is already in the wish list
     if (wishList.includes(locationId)) {
       alert('This item is already in your Wish List!');
     } else {
-      // Add the location ID to the wish list
       wishList.push(locationId);
       localStorage.setItem('wishList', JSON.stringify(wishList));
       alert('Added to Wish List!');
@@ -52,8 +48,15 @@ const LocationPage = () => {
     };
   }, []);
 
-  const GOOGLE_MAPS_API_KEY = 'AIzaSyAH7iDFCffRLwIJ56UUnkwBOhNzmSL2uMQ';// Use environment variable
-  // const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY; // Use environment variable
+  const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
+  const getImageSrc = (image) => {
+    if (image.startsWith('http')) {
+      return image;
+    } else {
+      return `http://localhost:8080/${image}`;
+    }
+  };
 
   return (
     <div className="location-page-container">
@@ -64,7 +67,7 @@ const LocationPage = () => {
         <div className="location-page-main">
           <figure className="location-page-figure">
             <img 
-              src={`http://localhost:8080/${locationData.image}`} 
+              src={getImageSrc(locationData.image)} 
               alt={locationData.name} 
               className="location-page-image" 
             />

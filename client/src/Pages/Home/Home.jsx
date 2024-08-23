@@ -9,7 +9,14 @@ const Home = () => {
 
   return (
     <div className="homepage">
-      <Carousel />
+      <Carousel 
+      //  responsive={responsive}
+      //  swipeable={true}
+      //  draggable={true}
+      //  showDots={false}
+      //  infinite={true}
+      //  autoPlay={false}
+      />
       <h1 className='SubHeadline'>Destinations You'll Love to Explore</h1>
       <div className="SloganPart">
         <strong className='slogan'>"Explore captivating destinations, discover hidden gems, and embark on unforgettable adventures. With  <span className='nameInSlogan'>Trip Finder</span>, your next great journey is just a click away."Let us guide you to your dream getaway!</strong>

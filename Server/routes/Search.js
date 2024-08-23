@@ -14,7 +14,7 @@ router.get('/search', async (req, res) => {
         const results = await Location.find({
             $or: [
                 { name: searchRegex },
-                { description: searchRegex },
+                { type: searchRegex },
                 { station: searchRegex }
             ]
         });

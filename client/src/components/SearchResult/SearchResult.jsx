@@ -9,7 +9,7 @@ const SearchResult = ({ searchResults }) => {
                 <div className="search-results">
                     {searchResults.map((result, index) => (
                         <div key={index} className="search-result-item">
-                            <img src={`http://localhost:8080/${result.image}`} alt={result.name} className="result-image" />
+                            <img src={`http://localhost:8080/${result.image || result.image.url}`} alt={result.name} className="result-image" />
                             <div className="result-details">
                                 
                                 <h3>{result.name}</h3>

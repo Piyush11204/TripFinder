@@ -73,7 +73,7 @@ const Navbar = () => {
                 <div className="nav-left">
                     <img className="logo" src={logoDevtalk} alt="Logo" />
                     <a href="/Home">
-                        <h1 className="LogoName">Trip <span className="Finder">Finder</span></h1>
+                        <h1 className="LogoName">Trip<span className="Finder">finder</span></h1>
                     </a>
                 </div>
                 <div className="sub-topic">
