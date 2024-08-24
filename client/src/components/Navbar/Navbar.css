@@ -196,7 +196,27 @@
 .btn-logout:hover {
     background-color: gray;
 }
-
+.vana {
+    background: radial-gradient(
+      circle at 100%,
+      wheat,
+      rgb(229, 189, 115) 50%,
+      rgb(233, 209, 167) 75%,
+      rgb(254, 214, 162) 75%
+    );
+    font-weight: 600;
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animatedTextGradient 0.6s linear infinite;
+  }
+  
+  @keyframes animatedTextGradient {
+    to {
+      background-position: 200% center;
+    }
+  }
 .LogoName {
     color: white;
     font-family: "ethnocentric";

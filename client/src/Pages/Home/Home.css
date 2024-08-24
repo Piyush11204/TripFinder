@@ -8,8 +8,12 @@ body {
 
 .homepage {
     padding: 20px;
-    background: wheat;
     min-height: 100vh;
+    --color-1: wheat;
+    --color-2: rgb(252, 238, 211);
+
+    background: linear-gradient(170deg, var(--color-1), var(--color-2));
+    
 }
 
 .container1 {
@@ -36,32 +40,19 @@ body {
     border-right: 2px solid;
     animation: type 1.5s steps(90) 1.5s 1 normal both, cursor 1s ;
     position: relative;
-    /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); */
+    cursor: none; 
+    
+   
 }
 
-@keyframes type {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes cursor {
-    50% {
-        border-color: transparent;
-        display:none;
-    }
-}
 
 .slogan {
-    font-family: "Pacifico", cursive;
+    font-family: "Matemasie", cursive;
     font-size: 42px;
     width: 65%;
     margin: 20px auto;
     text-align: center; 
+    font-weight: 800;
 }
 
 .nameInSlogan {
@@ -82,4 +73,19 @@ body {
 
 .Sloganimg:hover {
     transform: rotate(25deg);
+}
+@keyframes type {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes cursor {
+    50% {
+        opacity: 0; /* Hides the cursor */
+    }
 }

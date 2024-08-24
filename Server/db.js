@@ -6,13 +6,9 @@ mongoose.connect(process.env.DB_URL, { })
     .catch(err => console.error('Could not connect to MongoDB...', err));
 
 module.exports = () => {
-    const connectionParams = {
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-    };
     try {
-        mongoose.connect(process.env.DB_URL, connectionParams);
-        console.log('Connected to database successfully!');
+        mongoose.connect(process.env.DB_URL);
+        // console.log('Connected to database successfully!');
     } catch (error) {
         console.error('Error connecting to the database:', error);
     }

@@ -47,11 +47,21 @@
 }
 
 .footer-logo img {
-    width: 300px;
+    max-width: 70px;
     margin-bottom: 10px;
     filter: drop-shadow(11px 4px 7px black);
 }
-
+.LogoName1{
+    color: white;
+    font-family: "ethnocentric";
+    font-size: 40px;
+    text-decoration: none;
+    filter: drop-shadow(15px 10px 19px rgb(0, 0, 0));
+}
+.footer-logo{
+    display: flex;
+    align-items: center;
+}
 .footer-text {
     font-size: 20px;
 }

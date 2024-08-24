@@ -3,6 +3,7 @@ import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import tripvana from "../../img/Tripvana.png"
+import logoDevtalk from "../../img/Titlelogo2.png";
 
 const Footer = () => {
     return (
@@ -10,21 +11,21 @@ const Footer = () => {
             <div className="footer-cta">
                 <div className="cta-container">
                     <div className="single-cta">
-                        {/* <i className="fas fa-map-marker-alt"></i> */}
+                        
                         <div className="cta-text">
                             <h4>Find us here</h4>
-                            <span>1010 Avenue, sw 54321, Chandigarh</span>
+                            <span>Vidyavardhini's College Of Engineering & Technology, Vasai Road</span>
                         </div>
                     </div>
                     <div className="single-cta">
-                        {/* <i className="fas fa-phone"></i> */}
+                        
                         <div className="cta-text">
                             <h4>Call us</h4>
                             <span>9876543210</span>
                         </div>
                     </div>
                     <div className="single-cta">
-                        {/* <i className="far fa-envelope-open"></i> */}
+                        
                         <div className="cta-text">
                             <h4>Mail us</h4>
                             <span>mail@info.com</span>
@@ -35,9 +36,10 @@ const Footer = () => {
             <div className="footer-content">
                 <div className="footer-widget">
                     <div className="footer-logo">
-                        <a href="index.html">
-                            <img src={tripvana} alt="logo" />
-                        </a>
+                        
+                        <img className="logo1" src={logoDevtalk} alt="Logo" />
+                    <a href="/Home"><h1 className="LogoName1">Trip<span className="vana">vana</span></h1></a>
+                        
                     </div>
                     <div className="footer-text">
                         <strong>Welcome to Tripvana! Let us guide you to your dream getaway.</strong>

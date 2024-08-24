@@ -21,7 +21,7 @@ const Home = () => {
       <h1 className='SubHeadline'>Destinations You'll Love to Explore</h1>
       </div>
       <div className="SloganPart">
-        <strong className='slogan'>"Explore captivating destinations, discover hidden gems, and embark on unforgettable adventures. With  <span className='nameInSlogan'>Tripvana</span>, your next great journey is just a click away."Let us guide you to your dream getaway!</strong>
+        <h1 className='slogan'>"Ready for your next adventure?  With <span className='nameInSlogan'>Tripvana</span>, exploring breathtaking destinations and uncovering hidden gems has never been easier. Let us guide you to unforgettable experiences—your dream getaway is just a click away!"</h1>
         <div className="Sloganimg">
           <img src={AdventureAwaits} alt="" />
         </div>
