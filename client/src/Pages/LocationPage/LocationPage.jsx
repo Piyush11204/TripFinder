@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import './LocationPage.css';
 
 const LocationPage = () => {
@@ -7,6 +10,7 @@ const LocationPage = () => {
   const navigate = useNavigate();
   const locationData = location.state?.location || {};
 
+  const [sameTypeLocations, setSameTypeLocations] = useState([]);
   const [mapHeight, setMapHeight] = useState('450px');
 
   const handleBackClick = () => {
@@ -58,6 +62,34 @@ const LocationPage = () => {
     }
   };
 
+  // Fetch same type locations
+  useEffect(() => {
+    const fetchSameTypeLocations = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/addlocation');
+        const locations = response.data;
+
+        // Filter locations of the same type
+        const filteredLocations = locations.filter(
+          (loc) => loc.locationType === locationData.locationType && loc._id !== locationData._id
+        );
+        setSameTypeLocations(filteredLocations);
+      } catch (error) {
+        console.error('Error fetching same type locations:', error);
+      }
+    };
+
+    if (locationData.locationType) {
+      fetchSameTypeLocations();
+    }
+  }, [locationData.locationType, locationData._id]);
+
+  const responsive = {
+    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3, slidesToSlide: 2 },
+    tablet: { breakpoint: { max: 1024, min: 464 }, items: 2, slidesToSlide: 1 },
+    mobile: { breakpoint: { max: 464, min: 0 }, items: 1, slidesToSlide: 1 },
+  };
+
   return (
     <div className="location-page-container">
       <div className="location-page-content">
@@ -77,11 +109,11 @@ const LocationPage = () => {
             <p><strong>Type:</strong> {locationData.locationType || 'Not available'}</p>
             <p><strong>Nearby Station:</strong> {locationData.station || 'Not available'}</p>
             <p>
-                  <strong>Rating:</strong>
-                  {' '.repeat(locationData.rating).split('').map((_, index) => (
-                    <span key={index}>⭐</span>
-                  ))}
-                </p>
+              <strong>Rating:</strong>
+              {' '.repeat(locationData.rating).split('').map((_, index) => (
+                <span key={index}>⭐</span>
+              ))}
+            </p>
             {locationData.additionalDetails && (
               <p><strong>Review:</strong> {locationData.additionalDetails}</p>
             )}
@@ -104,6 +136,42 @@ const LocationPage = () => {
           <button className="back-button" onClick={handleBackClick}>Back</button>
           <button className="wishlist-button" onClick={handleAddToWishList}>Add to Wish List</button>
         </div>
+
+        {/* Recommendations Carousel */}
+        {sameTypeLocations.length > 0 && (
+          <div className="recommendation">
+            <h2>Recommended {locationData.locationType}'s</h2>
+            <Carousel
+              responsive={responsive}
+              swipeable={true}
+              draggable={true}
+              showDots={false}
+              infinite={true}
+              autoPlay={false}
+            >
+              {sameTypeLocations.map((location) => (
+                <div key={location._id} className="location-item">
+                  <h2 className='LocationName'>{location.name}</h2>
+                  <img 
+                    src={getImageSrc(location.image)} 
+                    alt={location.name} 
+                    className="location-image" 
+                  />
+                  <p><strong>Nearby Station:</strong> {location.station}</p>
+                  <p>
+                    <strong>Rating:</strong>
+                    {' '.repeat(location.rating).split('').map((_, index) => (
+                      <span key={index}>⭐</span>
+                    ))}
+                  </p>
+                  <Link to={`/location/${location._id}`} state={{ location }} className='view-more-link'>
+                    <button className='view-more'>View more</button>
+                  </Link>
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        )}
       </div>
     </div>
   );

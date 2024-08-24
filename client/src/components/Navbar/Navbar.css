@@ -200,13 +200,13 @@
     background: radial-gradient(
       circle at 100%,
       wheat,
-      rgb(229, 189, 115) 50%,
+      rgb(217, 175, 98) 50%,
       rgb(233, 209, 167) 75%,
-      rgb(254, 214, 162) 75%
+      rgb(248, 206, 150) 75%
     );
     font-weight: 600;
     background-size: 200% auto;
-    color: #000;
+    
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: animatedTextGradient 0.6s linear infinite;
@@ -222,7 +222,7 @@
     font-family: "ethnocentric";
     font-size: 20px;
     text-decoration: none;
-    filter: drop-shadow(10px 5px 15px rgb(0, 0, 0));
+    filter: drop-shadow(15px 15px 12px rgb(0, 0, 0));
 }
 
 .search-container {

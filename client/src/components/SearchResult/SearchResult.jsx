@@ -1,5 +1,5 @@
 import React from 'react';
-import './SearchResult.css'; 
+import './SearchResult.css';
 import { Link } from 'react-router-dom';
 
 const SearchResult = ({ searchResults }) => {
@@ -9,9 +9,12 @@ const SearchResult = ({ searchResults }) => {
                 <div className="search-results">
                     {searchResults.map((result, index) => (
                         <div key={index} className="search-result-item">
-                            <img src={`http://localhost:8080/${result.image || result.image.url}`} alt={result.name} className="result-image" />
+                            <img 
+                                src={result.image} 
+                                alt={result.name} 
+                                className="result-image" 
+                            />
                             <div className="result-details">
-                                
                                 <h3>{result.name}</h3>
                                 <div className="result-rating">
                                     Rating: {result.rating} ⭐
@@ -23,13 +26,11 @@ const SearchResult = ({ searchResults }) => {
                         </div>
                     ))}
                 </div>
-            ) :
-             (
+            ) : (
                 <div className="no-results">
                     {/* <h1>No locations found.</h1> */}
                 </div>
-            )
-            }
+            )}
         </div>
     );
 };
