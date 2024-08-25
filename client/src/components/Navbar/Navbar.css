@@ -198,11 +198,11 @@
 }
 .vana {
     background: radial-gradient(
-      circle at 100%,
+      circle at 80%,
       wheat,
-      rgb(217, 175, 98) 50%,
+      rgb(227, 181, 95) 50%,
       rgb(233, 209, 167) 75%,
-      rgb(248, 206, 150) 75%
+      hsl(32, 100%, 83%) 75%
     );
     font-weight: 600;
     background-size: 200% auto;

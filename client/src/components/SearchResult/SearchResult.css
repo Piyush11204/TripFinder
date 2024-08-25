@@ -80,6 +80,51 @@
 .view-location-btn:hover {
     background-color: #555;
 }
+.search-results {
+    max-height: 500px; /* Adjust as needed */
+    overflow-y: auto;
+    padding-right: 15px; /* For scroll padding */
+}
+
+.search-results-dropdown {
+    width: 100%; /* Adjust width as needed */
+}
+
+.scrollable-results {
+    height: 750px; /* Adjust the height for visibility */
+    /* overflow-y: auto; Enables scrolling */
+}
+
+.search-result-item {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.result-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.result-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-button {
+    /* Using the same styling as the search button */
+    padding: 10px 20px;
+    background-color: #3b3f46;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.search-button:hover {
+    background-color: wheat;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
