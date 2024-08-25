@@ -20,7 +20,11 @@ const SearchResult = ({ searchResults }) => {
             <div className="search-results-dropdown">
                 {searchResults.length > 0 ? (
                     <div className="search-results">
+                        <button className="search-button" onClick={handleHideResults}>
+                            Hide Results
+                        </button>
                         <div className="scrollable-results">
+                        
                             {searchResults.slice(0, 5).map((result, index) => (
                                 <div key={index} className="search-result-item">
                                     <img 
@@ -28,6 +32,7 @@ const SearchResult = ({ searchResults }) => {
                                         alt={result.name} 
                                         className="result-image" 
                                     />
+                                    
                                     <div className="result-details">
                                         <h3>{result.name}</h3>
                                         <div className="result-rating">
@@ -40,9 +45,7 @@ const SearchResult = ({ searchResults }) => {
                                 </div>
                             ))}
                         </div>
-                        <button className="search-button" onClick={handleHideResults}>
-                            Hide Results
-                        </button>
+                        
                     </div>
                 ) : (
                     <div className="no-results">
