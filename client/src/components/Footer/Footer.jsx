@@ -52,7 +52,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="footer-widget">
-                    <h3>Useful Links</h3>
+                    <h3 > Useful Links</h3>
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/contact">Contact</a></li>
@@ -63,7 +63,7 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="footer-widget">
-                    <h3>Subscribe</h3>
+                    <h3 className="subscribe">Subscribe</h3>
                     <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
                     <div className="subscribe-form">
                         <form>

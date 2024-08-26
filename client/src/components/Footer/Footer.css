@@ -160,7 +160,14 @@
   
   
 }
+.subscribe{
+    font-family: "ethnocentric";
+    font-weight: 500;
+   filter:drop-shadow( 7px 7px 7px #000000);
+   color: wheat;
 
+    
+}
 
 .subscribe-form button {
     margin-top: 20px;
