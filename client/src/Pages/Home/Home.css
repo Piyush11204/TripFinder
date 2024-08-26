@@ -10,7 +10,7 @@ body {
 .homepage {
     padding: 20px;
     min-height: 100vh;
-    --color-1: rgb(252, 238, 211);
+    --color-1: wheat;
     --color-2: rgb(252, 238, 211);
 
     background: linear-gradient(170deg, var(--color-1), var(--color-2));
