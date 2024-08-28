@@ -39,7 +39,7 @@ const Footer = () => {
                         
                         <img className="logo1" src={logoDevtalk} alt="Logo" />
                     <a href="/Home"><h1 className="LogoName1">Trip<span className="vana">vana</span></h1></a>
-                        {/* he */}
+                        
                     </div>
                     <div className="footer-text">
                         <strong>Welcome to Tripvana! Let us guide you to your dream getaway.</strong>
