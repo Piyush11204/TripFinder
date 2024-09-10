@@ -9,10 +9,12 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.20",
     "axios": "^0.24.0",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
     "navigate": "^0.3.6",
+    "postcss": "^8.4.45",
     "react": "^17.0.2",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^17.0.2",
@@ -46,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
   }
 }

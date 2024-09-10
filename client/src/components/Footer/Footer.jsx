@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import tripvana from "../../img/Tripvana.png"
+// import tripvana from "../../img/Tripvana.png"
 import logoDevtalk from "../../img/Titlelogo2.png";
 
 const Footer = () => {

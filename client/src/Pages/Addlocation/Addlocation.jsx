@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './AddLocation.css';
 
 const AddLocation = () => {
     const [formData, setFormData] = useState({
@@ -14,6 +13,14 @@ const AddLocation = () => {
     });
     const [previewImage, setPreviewImage] = useState(null);
 
+    const stations = [
+        'Churchgate', 'Mumbai CST', 'Dadar', 'Lokmanya Tilak', 'Andheri', 'Borivali', 
+        'Kalyan', 'Thane', 'Mumbai LTT', 'Mumbai Dadar', 'Mumbai Bandra', 'Mumbai Kurla', 
+        'Mumbai Vile Parle', 'Boisar', 'Palghar', 'Kelve Road', 'Virar', 'Vasai Road','Dahanu'
+    ];
+
+    const locationTypes = ['Park', 'Beach', 'Forest', 'Temple', 'Mountain', 'Historical Landmark', 'Water Park', 'Fort'];
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -21,14 +28,6 @@ const AddLocation = () => {
             setPreviewImage(URL.createObjectURL(file));
         }
     };
-
-    const stations = [
-        'Churchgate', 'Mumbai CST', 'Dadar', 'Lokmanya Tilak', 'Andheri', 'Borivali', 
-        'Kalyan', 'Thane', 'Mumbai LTT', 'Mumbai Dadar', 'Mumbai Bandra', 'Mumbai Kurla', 
-        'Mumbai Vile Parle', 'Boisar', 'Palghar', 'Kelve Road', 'Virar', 'Vasai Road','Dahanu'
-    ];
-
-    const locationTypes = ['Park', 'Beach', 'Forest', 'Temple', 'Mountain', 'historical landmarks','Water Park', 'Fort'];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -57,126 +56,116 @@ const AddLocation = () => {
             console.log('Location added successfully:', response.data);
             alert("Location added successfully");
         } catch (error) {
-            if (error.response) {
-                console.error('Server responded with an error:', error.response.data);
-            } else if (error.request) {
-                console.error('No response received:', error.request);
-            } else {
-                console.error('Error setting up the request:', error.message);
-            }
+            console.error('Error:', error);
         }
     };
 
     return (
-        <div className="container">
-            <div className="inner_container">
-                <div className="form_right">
-                    <form onSubmit={handleSubmit} className="picnic_form_inner">
-                        <h1 className='subheading'>Add Location</h1>
+        <div className="min-h-screen flex items-center justify-center bg-[#e9d7b5]">
+            <div className="bg-white shadow-lg rounded-lg mt-28 mb-14 w-full max-w-4xl p-8">
+                <h1 className="text-3xl font-bold text-center font-[ethnocentric]  text-gray-800 mb-6">Add Location</h1>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                        <label className="block text-gray-700 font-semibold">Location Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            required
+                        />
+                    </div>
 
-                        <div>
-                            <label className="Lable">Location Name:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className="input_field"
-                                required
-                            />
-                        </div>
+                    <div>
+                        <label className="block text-gray-700 font-semibold">Location Type</label>
+                        <select
+                            name="locationType"
+                            value={formData.locationType}
+                            onChange={handleChange}
+                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            required
+                        >
+                            <option value="" disabled>Choose Location Type</option>
+                            {locationTypes.map((type, index) => (
+                                <option key={index} value={type}>{type}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                        <div>
-                            <label className="Lable">Location Type:</label>
-                            <select
-                                name="locationType"
-                                value={formData.locationType}
-                                onChange={handleChange}
-                                className="dropdown"
-                                required
-                            >
-                                <option value="" disabled>Type of Location</option>
-                                {locationTypes.map((type, index) => (
-                                    <option key={index} value={type}>{type}</option>
-                                ))}
-                            </select>
-                        </div>
+                    <div>
+                        <label className="block text-gray-700 font-semibold">Nearby Station</label>
+                        <select
+                            name="station"
+                            value={formData.station}
+                            onChange={handleChange}
+                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            required
+                        >
+                            <option value="" disabled>Select Station</option>
+                            {stations.map((station, index) => (
+                                <option key={index} value={station}>{station}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                        <div>
-                            <label className="Lable">Nearby Station:</label>
-                            <select
-                                name="station"
-                                value={formData.station}
-                                onChange={handleChange}
-                                className="dropdown"
-                                required
-                            >
-                                <option value="" disabled>Select station</option>
-                                {stations.map((station, index) => (
-                                    <option key={index} value={station}>{station}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div>
-                            <label className="Lable">Image:</label>
-                            <input
-                                type="file"
-                                name="image"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                className="image-preview1"
-                                required
-                            />
-                            
-                        </div>
-
-                        <div>
-                            <label className="Lable">Description:</label>
-                            <textarea
-                                name="description"
-                                value={formData.description}
-                                onChange={handleChange}
-                                className="input_field"
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label className="Lable">Your Review:</label>
-                            <input
-                                type="text"
-                                name="additionalDetails"
-                                value={formData.additionalDetails}
-                                onChange={handleChange}
-                                className="input_field"
-                            />
-                        </div>
+                    <div>
+                        <label className="block text-gray-700 font-semibold">Image</label>
+                        <input
+                            type="file"
+                            name="image"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            required
+                        />
                         {previewImage && (
-                                <div className="image-preview1">
-                                    <img src={previewImage} alt="Profile Preview" />
-                                </div>
-                            )}
-
-                        <div className="rating_container">
-                            <label className="Lable">Rating:</label>
-                            <div className="rating_stars">
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                    <span
-                                        key={star}
-                                        className={`star ${formData.rating >= star ? 'filled' : ''}`}
-                                        onClick={() => handleRating(star)}
-                                    >
-                                        ★
-                                    </span>
-                                    
-                                ))}
+                            <div className="mt-4">
+                                <img src={previewImage} alt="Preview" className="max-h-64 rounded-lg" />
                             </div>
-                        </div>
+                        )}
+                    </div>
 
-                        <button type="submit" className="black_btn">Submit</button>
-                    </form>
-                </div>
+                    <div>
+                        <label className="block text-gray-700 font-semibold">Description</label>
+                        <textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-semibold">Your Review</label>
+                        <input
+                            type="text"
+                            name="additionalDetails"
+                            value={formData.additionalDetails}
+                            onChange={handleChange}
+                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                        />
+                    </div>
+
+                    <div className="flex justify-center items-center space-x-2">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <span
+                                key={star}
+                                className={`text-3xl cursor-pointer ${formData.rating >= star ? 'text-yellow-400' : 'text-gray-400'}`}
+                                onClick={() => handleRating(star)}
+                            >
+                                ★
+                            </span>
+                        ))}
+                    </div>
+
+                    <div className="flex justify-center">
+                        <button type="submit" className="px-6 py-3 bg-indigo-500 text-white rounded-lg shadow hover:bg-indigo-700 transition-all duration-300">
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     );
