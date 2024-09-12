@@ -3,6 +3,7 @@ import "./Home.css";
 import Carousel from '../../components/Carousel/Carousel';
 import LocationCards from '../../components/LocationCards/LocationCards';
 import AdventureAwaits from "../../img/AdventureAwaits.png"
+import Slider from '../../components/WhatCanWeDo/Slider';
 
 const Home = () => {
 
@@ -28,8 +29,8 @@ const Home = () => {
       </div>
 
       <LocationCards />
-
-    </div>
+      <Slider />
+      </div>
   );
 };
 

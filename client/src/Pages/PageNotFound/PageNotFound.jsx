@@ -6,7 +6,7 @@ import './PageNotFound.css' ;
 
 const NotFoundPage = () => {
     return (
-        <div className="not-found-container text-center bg-[wheat]  min-h-screen p-[50px] ">
+        <div className="not-found-container text-center bg-[#fff1e6]  min-h-screen p-[50px] ">
             {/* <img src={Lostimage} alt="404" className='img404' /> */}
             <h1 className="not-found-title  text-[156px] mt-[270px]">404</h1>
             <h2 className="not-found-subtitle  text-[44px] mx-0 my-2.5">Page Not Found</h2>

@@ -61,7 +61,7 @@ const AddLocation = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#e9d7b5]">
+        <div className="min-h-screen flex items-center justify-center bg-[#fff1e6]">
             <div className="bg-white shadow-lg rounded-lg mt-28 mb-14 w-full max-w-4xl p-8">
                 <h1 className="text-3xl font-bold text-center font-[ethnocentric]  text-gray-800 mb-6">Add Location</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">

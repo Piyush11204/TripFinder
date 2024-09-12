@@ -46,9 +46,9 @@ const Footer = () => {
                     </div>
                     <div className="footer-social-icon">
                         <span>Follow us</span>
-                        <a href="#"><FontAwesomeIcon icon={faFacebook} className="facebook-bg" /></a>
-                        <a href="#"><FontAwesomeIcon icon={faInstagram} className="instagram-bg" /></a>
-                        <a href="#"><FontAwesomeIcon icon={faGithub} className="github-bg" /></a>
+                        <a href="www.facebook.com"><FontAwesomeIcon icon={faFacebook} className="facebook-bg" /></a>
+                        <a href="www.instagram.com"><FontAwesomeIcon icon={faInstagram} className="instagram-bg" /></a>
+                        <a href="www.github.com"><FontAwesomeIcon icon={faGithub} className="github-bg" /></a>
                     </div>
                 </div>
                 <div className="footer-widget">

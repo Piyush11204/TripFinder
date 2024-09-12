@@ -3,8 +3,8 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f2f5; /* Using f0f2f5 color as in the previous styles */
-    background-color: wheat; /* Using wheat color as in the previous styles */
+    background-color: #fff1e6; /* Using f0f2f5 color as in the previous styles */
+    background-color: fff1e6; /* Using wheat color as in the previous styles */
 }
 
 .edit-profile-form {
