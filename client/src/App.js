@@ -7,6 +7,7 @@ import Addlocation from "./Pages/Addlocation/Addlocation";
 import EditProfile from "./Pages/EditProfile/EditProfile";
 import LocationPage from "./Pages/LocationPage/LocationPage";
 import NotFoundPage from "./Pages/PageNotFound/PageNotFound";
+import AboutUS from "./Pages/AboutUS/AboutUS";
 
 function App() {
 	const user = localStorage.getItem("token");
@@ -17,6 +18,7 @@ function App() {
 			<Route path="/editprofile" element={<EditProfile />} />
 			<Route path="/Home" element={<Home />} />
 			<Route path="/addlocation" element={<Addlocation />} />
+			<Route path="/about" element={<AboutUS />} />
 			<Route path="/location/:id" element={<LocationPage />} />
 			
 			{user && <Route path="/" exact element={<Home />} />}
