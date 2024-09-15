@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    profileImage: { type: String }, // Updated for profile image URL
+    profileImage: { type: String }, 
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -26,7 +26,7 @@ const validate = (data) => {
         lastName: Joi.string().required().label("Last Name"),
         email: Joi.string().email().required().label("Email"),
         password: passwordComplexity().required().label("Password"),
-        profileImage: Joi.string().uri().label("Profile Image"), // Updated for profile image validation
+        profileImage: Joi.string().uri().label("Profile Image"), 
     });
     return schema.validate(data);
 };

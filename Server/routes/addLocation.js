@@ -4,18 +4,17 @@ const Location = require('../models/addLocation');
 const { handleAllLocation } = require('../controllers/addLocation');
 const router = express.Router();
 
-// Configure multer for file uploads
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // Adjust path as necessary
+        cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname); // Keep original file name
+        cb(null, file.originalname); 
     }
 });
 const upload = multer({ storage: storage });
 
-// Basic validation function
 const validateLocation = (data) => {
     const errors = [];
     if (!data.name) errors.push("Name is required");

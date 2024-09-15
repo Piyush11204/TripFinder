@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const User = require('../models/user');
-const auth = require('./auth'); // Authentication middleware
+const auth = require('./auth'); 
 
 const router = express.Router();
 
@@ -32,11 +32,10 @@ router.put('/api/users/me', auth, upload.single('profileImage'), async (req, res
         if (!user) {
             return res.status(404).send({ error: 'User not found' });
         }
-
         updates.forEach((update) => user[update] = req.body[update]);
 
         if (req.file) {
-            user.profileImage = `/uploads/${req.file.filename}`; // Save the relative path
+            user.profileImage = `/uploads/${req.file.filename}`; 
         }
 
         await user.save();
