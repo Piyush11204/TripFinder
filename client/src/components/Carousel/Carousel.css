@@ -1,11 +1,8 @@
 .carousel {
     position: relative;
-    /* margin: 10px auto; */
-    /* width: 95%; */
-    /* max-width: 95%; */
     overflow: hidden;
     text-align: center;   
-    z-index: 10; 
+
   }
 
   .carousel-inner {
@@ -13,9 +10,6 @@
     transition: transform 0.5s ease-in-out;
     will-change: transform;
 
-    z-index: 0;
-
-   
   }
   .carousel {
     position: relative; 
@@ -36,7 +30,7 @@
   
   .carousel-item img {
     width: 100%;
-    height: 600px;
+    height: 700px;
     border-radius: 10px;
     object-fit: cover;
     z-index: -1;

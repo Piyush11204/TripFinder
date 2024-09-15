@@ -8,12 +8,11 @@ import Carousel5 from '../../img/Carousel5.jpg';
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [Carousel1, Carousel2, Carousel3 ,Carousel4,Carousel5];
-
+  const images = [Carousel1, Carousel2, Carousel3 ,Carousel4 ,Carousel5];
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
-    }, 3200); // Change slide every 3 seconds
+    }, 3200); 
     return () => clearInterval(interval);
   }, [images.length]);
 
@@ -30,9 +29,6 @@ const Carousel = () => {
       <br />
       <br />
       <br />
-      <br />
-      <br />
-
       <div className="carousel-inner" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {images.map((image, index) => (
           <div className="carousel-item" key={index}>

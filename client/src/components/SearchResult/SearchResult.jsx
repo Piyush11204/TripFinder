@@ -7,12 +7,12 @@ const SearchResult = ({ searchResults }) => {
 
     useEffect(() => {
         if (searchResults.length > 0) {
-            setVisible(true); // Show results when new search results come in
+            setVisible(true); 
         }
     }, [searchResults]);
 
     const handleHideResults = () => {
-        setVisible(false); // Hide the results
+        setVisible(false); 
     };
 
     return (
@@ -49,7 +49,7 @@ const SearchResult = ({ searchResults }) => {
                     </div>
                 ) : (
                     <div className="no-results">
-                        {/* <h1>No locations found.</h1> */}
+                        <p>No results found.</p>
                     </div>
                 )}
             </div>

@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 html,
 body {
     margin: 0;
     padding: 0;
     height: 100%;
     box-sizing: border-box;
-    /* Ensure all elements respect box-sizing */
+   
 }
 
 .homepage {
@@ -27,13 +28,10 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 3rem;
-    /* Consistent font size */
     font-family: "Ethnocentric", sans-serif;
-    /* Use Ethnocentric with fallback */
     text-align: center;
     filter: drop-shadow(0px 10px 10px gray);
     background: -webkit-linear-gradient(25deg, #000, #333);
-    /* Gradient effect */
     background-clip: "";
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -44,15 +42,11 @@ body {
     animation: type 1.5s steps(90) 1.5s 1 normal both, cursor 1s;
     position: relative;
     caret-color: transparent;
-    /* This hides the caret */
+   
     outline: none;
-    /* This removes the focus outline */
-
-
 
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 
 
 .slogan {
