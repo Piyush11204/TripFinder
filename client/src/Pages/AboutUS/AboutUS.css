@@ -1,15 +1,12 @@
 .ag-format-container {
-    /* width: 1500px; */
+    width: 90%;
     margin: 0 auto;
     background: #fff1e4;
     
   }
-  
-  
-  body {
-    background-color: #aaa;
-    
-  }
+ body{
+  background: #fff1e4;
+ }
   .ag-courses_box {
     display: -webkit-box;
     display: -ms-flexbox;
