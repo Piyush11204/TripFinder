@@ -127,3 +127,13 @@
 .wishlist-button:hover {
   opacity: 0.8;
 }
+.location-item1{
+  margin-top: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width: 380px;
+  min-width: 250px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

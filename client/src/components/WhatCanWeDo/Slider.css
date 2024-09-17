@@ -1,5 +1,5 @@
 .content {
-  flex: 1;
+  
     position: absolute;
     bottom: -100%;
     left: 0;
@@ -11,8 +11,10 @@
   }
   
   li:hover .content {
-    flex:3;
+    
     bottom: 0;
+    height: 400px;
+    font-size: 29px;
     transition: all 0.5s;
     transition-delay: 0.5s;
     color: #fff;
