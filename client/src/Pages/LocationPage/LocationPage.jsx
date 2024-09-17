@@ -138,11 +138,11 @@ const LocationPage = () => {
             Add to Wish List
           </button>
         </div>
-
+            <hr className='border-2 ' />
         {/* Recommendations Carousel */}
         {sameTypeLocations.length > 0 && (
           <div className="mt-10">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Recommended {locationData.locationType}'s</h2>
+            <h2 className="text-3xl ml-11 font-bold mb-6 text-gray-800">Recommended {locationData.locationType}'s</h2>
             <Carousel
               responsive={responsive}
               swipeable={true}
@@ -152,7 +152,7 @@ const LocationPage = () => {
               autoPlay={false}
             >
               {sameTypeLocations.map((location) => (
-                <div key={location._id} className="p-4 bg-gray-100 rounded-xl shadow-md max-w-xs mx-auto">
+                <div key={location._id} className="p-4 mb-5 border-2 bg-gray-200 rounded-xl drop-shadow-2xl shadow-md max-w-xs mx-auto">
                   <h2 className="text-lg font-bold mb-2 overflow-hidden text-ellipsis whitespace-nowrap">{location.name}</h2>
                   <img
                     src={getImageSrc(location.image)}

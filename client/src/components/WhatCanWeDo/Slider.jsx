@@ -1,5 +1,5 @@
 import React from 'react';
-import './Slider.css'; // Import custom CSS for hover effects
+import './Slider.css'; 
 
 const Slider = () => {
   return (
