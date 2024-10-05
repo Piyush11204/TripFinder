@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/search', async (req, res) => {
     try {
-        const query = req.query;
+        const query = req.query.query;
         // const query = req.query.query;
         if (!query) {
             return res.status(400).send({ message: 'Query parameter is required' });

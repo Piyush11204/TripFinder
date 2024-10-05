@@ -3,7 +3,58 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import "./LocationCards.css";
+import { Star, MapPin, ChevronRight } from 'lucide-react';
+
+const LocationCard = ({ location }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div 
+      className="bg-slate-100 rounded-lg shadow-md overflow-hidden transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-xl"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="relative h-48 overflow-hidden">
+        <img 
+          src={location.image.startsWith('http') ? location.image : `http://localhost:8080/${location.image || location.image.url}`}
+          alt={location.name} 
+          className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
+        />
+        <div className="absolute top-0 right-0 bg-purple-600 text-white px-2 py-1 m-2 rounded-full text-xs font-semibold">
+          {location.locationType}
+        </div>
+      </div>
+      <div className="p-4">
+      <h2 className="text-xl font-semibold mb-2 text-gray-800 truncate">{location.name}</h2>
+        <div className="flex items-center mb-2">
+          <MapPin size={16} className="text-gray-500 mr-1" />
+          <p className="text-sm text-gray-600">{location.station}</p>
+        </div>
+        <div className="flex items-center mb-2">
+          {[...Array(5)].map((_, index) => (
+            <Star
+              key={index}
+              size={16}
+              className={index < location.rating ? "text-yellow-400" : "text-gray-300"}
+              fill={index < location.rating ? "currentColor" : "none"}
+            />
+          ))}
+        </div>
+        {location.additionalDetails && (
+          <p className="text-sm text-gray-600 mb-4 line-clamp-2 truncate">{location.additionalDetails}</p>
+        )}
+        <Link 
+          to={`/location/${location._id}`} 
+          state={{ location }} 
+          className="inline-flex items-center text-purple-600 hover:text-purple-800 transition-colors duration-200"
+        >
+          View more
+          <ChevronRight size={16} className={`ml-1 transition-transform duration-200 ${isHovered ? 'translate-x-1' : ''}`} />
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 const LocationCards = () => {
   const [groupedLocations, setGroupedLocations] = useState({});
@@ -14,7 +65,6 @@ const LocationCards = () => {
         const response = await axios.get('http://localhost:8080/api/addlocation');
         const locations = response.data;
 
-        // Group locations by type
         const grouped = locations.reduce((acc, location) => {
           const { locationType } = location;
           if (!acc[locationType]) {
@@ -40,40 +90,34 @@ const LocationCards = () => {
   };
 
   return (
-    <div className="location-carousels">
-      {Object.keys(groupedLocations).map((type) => (
-        <div key={type} className="location-carousel">
-          <h2 className="carousel-title">🍂{type}'s</h2>
+    <div className="py-8 bg-gray-100">
+      {Object.entries(groupedLocations).map(([type, locations]) => (
+        <div key={type} className="mb-12">
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+            <span className="mr-2" role="img" aria-label={type}>
+              {type === 'Beach' ? '🏖️' :type === 'Temple' ? '🛕':type === 'Park' ? '⛲':type === 'Water park' ? '🎢': type === 'Mountain' ? '⛰️' : type === 'City' ? '🏙️' : '🍂'}
+            </span>
+            {type} Destinations
+          </h2>
           <Carousel
             responsive={responsive}
             swipeable={true}
             draggable={true}
             showDots={false}
             infinite={true}
-            autoPlay={false}
+            autoPlay={true}
+            autoPlaySpeed={3000}
+            keyBoardControl={true}
+            customTransition="all .5s"
+            transitionDuration={500}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item-padding-40-px"
           >
-            {groupedLocations[type].map((location) => (
-              <div key={location._id} className="location-item">
-                <h2 className='LocationName'>{location.name}</h2>
-
-                {/* Conditional image source handling */}
-                {location.image.startsWith('http') ? (
-                  <img src={location.image} alt={location.name} className="location-image" />
-                ) : (
-                  <img src={`http://localhost:8080/${location.image || location.image.url}`} alt={location.name} className="location-image" />
-                )}
-
-                <p><strong>Nearby Station:</strong> {location.station}</p>
-                <p>
-                  <strong>Rating:</strong>
-                  {' '.repeat(location.rating).split('').map((_, index) => (
-                    <span key={index}>⭐</span>
-                  ))}
-                </p>
-                {location.additionalDetails && <p className='forReview'><strong>Review:</strong> {location.additionalDetails}</p>}
-                <Link to={`/location/${location._id}`} state={{ location }} className='view-more-link'>
-                  <button className='view-more'>View more</button>
-                </Link>
+            {locations.map((location) => (
+              <div key={location._id} className="px-2">
+                <LocationCard location={location} />
               </div>
             ))}
           </Carousel>

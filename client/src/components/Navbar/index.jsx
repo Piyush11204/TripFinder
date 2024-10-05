@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./Navbar.css";
 import logoDevtalk from "../../img/Titlelogo2.png";
 import WishListLogo from "../../img/WishListLogo.png";
@@ -10,7 +11,7 @@ const Navbar = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [searchResults, setSearchResults] = useState([]); // Move searchResults state here
+    const [searchResults, setSearchResults] = useState([]); 
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -27,7 +28,7 @@ const Navbar = () => {
             await fetchSearchResults(searchTerm.trim());
         } else {
             console.log('Please enter a search term.');
-            setSearchResults([]); // Clear search results if no search term
+            setSearchResults([]); 
         }
     };
 
@@ -72,13 +73,13 @@ const Navbar = () => {
             <nav className="navbar">
                 <div className="nav-left">
                     <img className="logo" src={logoDevtalk} alt="Logo" />
-                    <a href="/Home">
+                    <Link to="/Home">
                         <h1 className="LogoName">Trip<span className="vana">vana</span></h1>
-                    </a>
+                    </Link>
                 </div>
                 <div className="sub-topic">
-                    <a className="link1" href="/addLocation">Add location</a>
-                    <a className="link1" href="/contact">Contact</a>
+                    <Link className="link1" to="/addLocation">Add location</Link>
+                    <Link className="link1" to="/contact">Contact</Link>
                 </div>
                 <div className="search-container">
                     <input
@@ -112,13 +113,13 @@ const Navbar = () => {
                             <div className="dropdown-menu">
                                 <p>{currentUser.firstName} {currentUser.lastName}</p>
                                 <p>{currentUser.email}</p>
-                                <a href="/editProfile" className="edit-profile">Edit Profile</a>
+                                <Link to="/editProfile" className="edit-profile">Edit Profile</Link>
                                 <button className="btn-logout" onClick={handleLogout}>Logout</button>
                             </div>
                         )}
                     </div>
                 ) : (
-                    <a href="/signup"><button className="btn-login">Login</button></a>
+                    <Link to="/signup"><button className="btn-login">Login</button></Link>
                 )}
             </nav>
         </div>
