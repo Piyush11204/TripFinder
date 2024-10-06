@@ -1,41 +1,4 @@
-import React, { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
-import Carousel from '../../components/Carousel/Carousel';
-import LocationCards from '../../components/LocationCards/LocationCards';
-import Slider from '../../components/WhatCanWeDo/Slider';
-import TripModal from '../../components/TripModal';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-
-const DestinationCard = ({ title, date, color, onClick }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div
-      className={`${color} rounded-lg shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${isHovered ? 'transform -translate-y-2 shadow-xl' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick} 
-    >
-      <Link to="#" className="p-6 text-white  h-full flex flex-col justify-between" onClick={onClick}>
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <div>
-          {date && (
-            <p className="text-sm opacity-75 mb-2">
-              Start: <span className="font-bold">{date}</span>
-            </p>
-          )}
-          <ChevronRight className={`transition-all duration-300 ease-in-out ${isHovered ? 'translate-x-2' : ''}`} />
-        </div>
-      </Link>
-    </div>
-  );
-};
-
-const Home = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedTrip, setSelectedTrip] = useState(null);
-
-  const trips = [
+const tripPlans = [
     {
       title: "Explore the Wonders of Bali",
       date: "20.09.2024",
@@ -272,42 +235,6 @@ const Home = () => {
         "Climate: Hot and dry, Mar-Apr is a good time to visit"
       ]
     }
-    // More trips go here...
   ];
-
-  const openModal = (trip) => {
-    setSelectedTrip(trip);
-    setModalOpen(true);
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-purple-100">
-      <Carousel />
-
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-5xl font-bold text-center text-purple-800 mb-12 animate-fade-in">
-          Destinations You'll Love to Explore
-        </h1>
-        <h1 className='text-3xl font-semibold text-purple-500 my-5 ml-4'>Internaltional Trips </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {trips.map((trip, index) => (
-            <DestinationCard key={index} {...trip} onClick={() => openModal(trip)} />
-          ))}
-        </div>
-      </div>
-
-      <LocationCards />
-      <Slider />
-
-      {/* Modal for Trip Details */}
-      <TripModal 
-        isOpen={isModalOpen} 
-        onClose={() => setModalOpen(false)} 
-        trip={selectedTrip} 
-      />
-    </div>
-  );
-};
-
-export default Home;
+  
+  export default tripPlans;

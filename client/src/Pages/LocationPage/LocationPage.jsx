@@ -15,7 +15,7 @@ const LocationPage = () => {
   const handleBackClick = () => {
     navigate(-1);
   };
-
+ 
   const handleAddToWishList = () => {
     const locationId = locationData._id;
     if (!locationId) {
@@ -60,7 +60,7 @@ const LocationPage = () => {
       return `http://localhost:8080/${image}`;
     }
   };
-
+   
   useEffect(() => {
     const fetchSameTypeLocations = async () => {
       try {

@@ -17,7 +17,7 @@
     margin-top: 30px;
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 5px;
     margin-bottom: 10px;
     background-color: white;
     border: 1px solid #ddd;
@@ -47,17 +47,12 @@
 
 .result-details h3 {
     margin: 0;
-    font-size: 1.2em;
+    font-size: 14px;
     color: #333;
     
 }
 
-.result-details p {
-    margin: 8px 0 0;
-    font-size: 1em;
-    color: #555;
-    line-height: 1.4;
-}
+
 
 .result-rating {
     margin-top: 5px;
@@ -104,8 +99,8 @@
 }
 
 .result-image {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin-right: 10px;
 }
 

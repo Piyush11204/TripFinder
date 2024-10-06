@@ -8,6 +8,10 @@ import EditProfile from "./Pages/EditProfile/EditProfile";
 import LocationPage from "./Pages/LocationPage/LocationPage";
 import NotFoundPage from "./Pages/PageNotFound/PageNotFound";
 import AboutUS from "./Pages/AboutUS/AboutUS";
+import AboutUs from "./Pages/AboutUS/AboutUS";
+import WishList from "./Pages/Wishlist Page/WishList";
+import ContactUs from "./Pages/ContactUs/Contact";
+import TripModal from "./components/TripModal";
 
 function App() {
 	const user = localStorage.getItem("token");
@@ -20,6 +24,11 @@ function App() {
 			<Route path="/addlocation" element={<Addlocation />} />
 			<Route path="/about" element={<AboutUS />} />
 			<Route path="/location/:id" element={<LocationPage />} />
+			<Route path="/aboutus" element={<AboutUs />}/>
+			<Route path="/wishlist" element={<WishList />} />
+			<Route path="/contact" element={<ContactUs />}/>
+			<Route path="/trip/:title" component={TripModal} />
+
 			
 			{user && <Route path="/" exact element={<Home />} />}
 			<Route path="/Signup" exact element={<Signup />} />

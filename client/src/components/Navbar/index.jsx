@@ -78,6 +78,7 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className="sub-topic">
+                    <Link className="link1" to="/aboutus">About Us</Link>
                     <Link className="link1" to="/addLocation">Add location</Link>
                     <Link className="link1" to="/contact">Contact</Link>
                 </div>
@@ -97,7 +98,8 @@ const Navbar = () => {
                 {currentUser ? (
                     <div className="user-info">
                         <div>
-                            <img className="wishlist" src={WishListLogo} alt="Wishlist" />
+                        <Link className="link1" to="/wishlist">
+                            <img className="wishlist" src={WishListLogo} alt="Wishlist" /></Link>
                         </div>
                         <div className="user-details" onClick={toggleDropdown}>
                             {currentUser.profileImage ? (

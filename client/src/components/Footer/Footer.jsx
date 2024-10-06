@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import logoDevtalk from "../../img/Titlelogo2.png";
@@ -35,9 +36,9 @@ const Footer = () => {
                 <div className="mb-8">
                     <div className="flex items-center">
                         <img className="w-20 mb-4" src={logoDevtalk} alt="Logo" />
-                        <a href="/Home">
-                            <h1 className="text-5xl font-ethnocentric text-white drop-shadow-lg">Trip<span className="text-wheat">vana</span></h1>
-                        </a>
+                        <Link to="/Home">
+                            <h1 className="text-5xl font-ethnocentric text-white drop-shadow-lg">Trip<span className="text-purple-500">vana</span></h1>
+                        </Link>
                     </div>
                     <p className="text-lg font-semibold mt-4">
                         Welcome to Tripvana! Let us guide you to your dream getaway.
@@ -45,13 +46,13 @@ const Footer = () => {
                     <div className="mt-6">
                         <span className="block text-xl font-bold mb-2">Follow us</span>
                         <div className="flex space-x-3">
-                            <a href="www.facebook.com" className="bg-blue-600 border-2 w-10 h-10 p-1.5 rounded-full">
+                            <a href="https://www.facebook.com" className="bg-blue-600 border-2 w-10 h-10 p-1.5 rounded-full" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon icon={faFacebook} className="h-6 " />
                             </a>
-                            <a href="www.instagram.com" className="bg-pink-500 border-2 w-10 h-10 p-1.5 rounded-full">
+                            <a href="https://www.instagram.com" className="bg-pink-500 border-2 w-10 h-10 p-1.5 rounded-full" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon icon={faInstagram} className="h-6 "  />
                             </a>
-                            <a href="www.github.com" className="bg-gray-800 border-2 h-10 w-10 p-1.5 rounded-full">
+                            <a href="https://www.github.com" className="bg-gray-800 border-2 h-10 w-10 p-1.5 rounded-full" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon icon={faGithub} className="h-6 " />
                             </a>
                         </div>
@@ -62,18 +63,18 @@ const Footer = () => {
                 <div className="mb-8">
                     <h3 className="text-xl mb-4">Useful Links</h3>
                     <ul className="space-y-2">
-                        <li><a href="/" className="text-gray-400 hover:text-wheat">Home</a></li>
-                        <li><a href="/contact" className="text-gray-400 hover:text-wheat">Contact</a></li>
-                        <li><a href="about" className="text-gray-400 hover:text-wheat">About us</a></li>
-                        <li><a href="/team" className="text-gray-400 hover:text-wheat">Expert Team</a></li>
-                        <li><a href="/contactus" className="text-gray-400 hover:text-wheat">Contact us</a></li>
-                        <li><a href="log" className="text-gray-400 hover:text-wheat">Latest News</a></li>
+                        <li><Link to="/" className="text-gray-400 hover:text-purple-500">Home</Link></li>
+                        <li><Link to="/contact" className="text-gray-400 hover:text-purple-500">Contact</Link></li>
+                        <li><Link to="/about" className="text-gray-400 hover:text-purple-500">About us</Link></li>
+                        <li><Link to="/team" className="text-gray-400 hover:text-purple-500">Expert Team</Link></li>
+                        <li><Link to="/contactus" className="text-gray-400 hover:text-purple-500">Contact us</Link></li>
+                        <li><Link to="/log" className="text-gray-400 hover:text-purple-500">Latest News</Link></li>
                     </ul>
                 </div>
 
                 {/* Subscribe Section */}
                 <div className="mb-8">
-                    <h3 className="text-xl font-ethnocentric text-wheat drop-shadow-lg">Subscribe</h3>
+                    <h3 className="text-xl font-ethnocentric text-purple-500 drop-shadow-lg">Subscribe</h3>
                     <p className="mt-4">Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
                     <div className="mt-6">
                         <form className="flex space-x-3">
@@ -84,7 +85,7 @@ const Footer = () => {
                             />
                             <button
                                 type="button"
-                                className="bg-wheat text-black font-semibold px-5 py-2 rounded-full shadow-md hover:bg-yellow-400"
+                                className="bg-purple-400 text-black font-semibold px-5 py-2 rounded-full shadow-md hover:bg-yellow-400"
                             >
                                 Subscribe
                             </button>
@@ -93,7 +94,6 @@ const Footer = () => {
                 </div>
             </div>
 
-            
             <div className="bg-gray-800 text-center py-4 mt-8">
                 <p className="text-gray-400">
                     © 2024 Tripvana, Inc. All rights reserved.
