@@ -22,8 +22,8 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSuccessMessage('');
-    setErrorMessage('');
+    setSuccessMessage('its done');
+    setErrorMessage('nhi hua');
 
     try {
       const response = await axios.post('http://localhost:8080/api/contact', formData);  // Replace with your API endpoint

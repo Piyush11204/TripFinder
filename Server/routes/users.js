@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const { User, validate } = require('../models/user');
-const { handleAllUsers, handleCreatingUser } = require('../controllers/users');
+const { handleAllUsers,handleUpdateProfile, handleCreatingUser } = require('../controllers/users');
 
 // Middlewarer
 const auth = (req, res, next) => {
@@ -23,6 +23,7 @@ router.get('/', handleAllUsers);
 // the post is use to create the new user...
 router.post('/',handleCreatingUser);
 
+router.put("/me", auth, handleUpdateProfile);
 // GET current user
 router.get('/me', auth, async (req, res) => {
     try {

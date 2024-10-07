@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom"; 
 import { Compass, Users, Award, Globe, Zap, Heart } from 'lucide-react';
 
 const AboutUs = () => {
@@ -101,9 +102,11 @@ const AboutUs = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-semibold mb-6">Ready to Start Your Adventure?</h2>
           <p className="text-xl mb-8">Join us at Tripvana and discover the world in a whole new way.</p>
+          <Link to="/Home">
           <button className="bg-white text-purple-700 font-semibold py-3 px-8 rounded-full hover:bg-purple-100 transition duration-300">
             Plan Your Trip Now
           </button>
+          </Link>
         </div>
       </section>
     </div>

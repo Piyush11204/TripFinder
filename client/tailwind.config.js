@@ -10,6 +10,9 @@ module.exports = {
         yellow: {
           100: '#fcf4e9',
         },
+        lineClamp: {
+          3: '3',
+        },
       },
       fontFamily: {
         ethnocentric: ['Ethnocentric', 'sans-serif'],

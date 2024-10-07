@@ -11,7 +11,33 @@ async function handleAllUsers(req, res) {
         res.status(500).send({ message: "Internal Server Error" });
     }
 }
+async function handleUpdateProfile(req, res) {
+    try {
+        // Validate request data (make password optional in validation)
+        const { error } = validate(req.body);
+        if (error) return res.status(400).send({ message: error.details[0].message });
 
+        const user = await User.findById(req.user._id);
+        if (!user) return res.status(404).send({ message: "User not found" });
+
+        // Update the fields provided
+        user.firstName = req.body.firstName || user.firstName;
+        user.lastName = req.body.lastName || user.lastName;
+        user.email = req.body.email || user.email;
+
+        // If password is provided, hash it and update
+        if (req.body.password) {
+            const salt = await bcrypt.genSalt(Number(process.env.SALT));
+            user.password = await bcrypt.hash(req.body.password, salt);
+        }
+
+        await user.save();
+        res.send({ message: "Profile updated successfully" });
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+}
 // Handler to create a new user
 async function handleCreatingUser(req, res) {
     try {
@@ -45,4 +71,5 @@ async function handleCreatingUser(req, res) {
 module.exports = {
     handleAllUsers,
     handleCreatingUser,
+    handleUpdateProfile,
 };

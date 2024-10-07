@@ -5,6 +5,7 @@ import logoDevtalk from "../../img/Titlelogo2.png";
 import WishListLogo from "../../img/WishListLogo.png";
 import axios from 'axios';
 import SearchResult from "../SearchResult/SearchResult";
+import { LogIn } from 'lucide-react'; 
 
 
 const Navbar = () => {
@@ -92,9 +93,11 @@ const Navbar = () => {
                         onChange={handleInputChange}
                     />
                     <i className="search-icon fas fa-search"></i>
-                    <button className="SearchBtn" onClick={handleSearch}>Search</button>
+                    <button className="SearchBtn #A855F7" onClick={handleSearch}>Search</button>
                     <SearchResult searchResults={searchResults} />
+                    
                 </div>
+                <Link className="link1 font-bold text-white" to="/Blog">Blogs</Link>
                 {currentUser ? (
                     <div className="user-info">
                         <div>
@@ -121,7 +124,12 @@ const Navbar = () => {
                         )}
                     </div>
                 ) : (
-                    <Link to="/signup"><button className="btn-login">Login</button></Link>
+                    <Link to="/signup">
+                    <button className="flex items-center px-4 py-2 bg-purple-600 text-white rounded-full shadow-md hover:bg-indigo-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      <LogIn className="w-5 h-5 mr-2" /> {/* Lucide icon */}
+                      Login
+                    </button>
+                  </Link>
                 )}
             </nav>
         </div>
