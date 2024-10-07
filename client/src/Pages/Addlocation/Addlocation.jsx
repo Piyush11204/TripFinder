@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MapPin, Image, Star, Send } from 'lucide-react';
 import axios from 'axios';
 
 const AddLocation = () => {
@@ -41,13 +42,9 @@ const AddLocation = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = new FormData();
-        data.append('name', formData.name);
-        data.append('locationType', formData.locationType);
-        data.append('station', formData.station);
-        data.append('image', formData.image);
-        data.append('description', formData.description);
-        data.append('additionalDetails', formData.additionalDetails);
-        data.append('rating', formData.rating);
+        Object.keys(formData).forEach(key => {
+            data.append(key, formData[key]);
+        });
 
         try {
             const response = await axios.post('http://localhost:8080/api/addlocation', data, {
@@ -61,45 +58,55 @@ const AddLocation = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#fff1e6]">
-            <div className="bg-white shadow-lg rounded-lg mt-28 mb-14 w-full max-w-4xl p-8">
-                <h1 className="text-3xl font-bold text-center font-[ethnocentric]  text-gray-800 mb-6">Add Location</h1>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                        <label className="block text-gray-700 font-semibold">Location Name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
-                            required
-                        />
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto mt-12 bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div className="bg-indigo-600 py-6 px-8">
+                    <h1 className="text-3xl font-bold text-white">Add New Location</h1>
+                    <p className="mt-2 text-indigo-200">Share a beautiful place with the community</p>
+                </div>
+                <form onSubmit={handleSubmit} className="py-8 px-8 space-y-6">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Location Name</label>
+                            <div className="mt-1 relative rounded-md shadow-sm">
+                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <MapPin className="h-5 w-5 text-gray-400" />
+                                </div>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    className="block w-full pl-10 sm:text-sm h-12 border-2 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="Enter location name"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Location Type</label>
+                            <select
+                                name="locationType"
+                                value={formData.locationType}
+                                onChange={handleChange}
+                                className="mt-1 block w-full h-12  pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                required
+                            >
+                                <option value="" disabled>Choose Location Type</option>
+                                {locationTypes.map((type, index) => (
+                                    <option key={index} value={type}>{type}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-semibold">Location Type</label>
-                        <select
-                            name="locationType"
-                            value={formData.locationType}
-                            onChange={handleChange}
-                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
-                            required
-                        >
-                            <option value="" disabled>Choose Location Type</option>
-                            {locationTypes.map((type, index) => (
-                                <option key={index} value={type}>{type}</option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div>
-                        <label className="block text-gray-700 font-semibold">Nearby Station</label>
+                        <label className="block text-sm font-medium text-gray-700">Nearby Station</label>
                         <select
                             name="station"
                             value={formData.station}
                             onChange={handleChange}
-                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            className="mt-1 block h-12 border-1 w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                             required
                         >
                             <option value="" disabled>Select Station</option>
@@ -110,59 +117,69 @@ const AddLocation = () => {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-semibold">Image</label>
-                        <input
-                            type="file"
-                            name="image"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
-                            required
-                        />
+                        <label className="block text-sm font-medium text-gray-700">Image</label>
+                        <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div className="space-y-1 text-center">
+                                <Image className="mx-auto h-12 w-12 text-gray-400" />
+                                <div className="flex text-sm text-gray-600">
+                                    <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                        <span>Upload a file</span>
+                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} accept="image/*" required />
+                                    </label>
+                                    <p className="pl-1">or drag and drop</p>
+                                </div>
+                                <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                            </div>
+                        </div>
                         {previewImage && (
                             <div className="mt-4">
-                                <img src={previewImage} alt="Preview" className="max-h-64 rounded-lg" />
+                                <img src={previewImage} alt="Preview" className="max-h-64 rounded-lg mx-auto" />
                             </div>
                         )}
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-semibold">Description</label>
+                        <label className="block text-sm font-medium text-gray-700">Description</label>
                         <textarea
                             name="description"
                             value={formData.description}
                             onChange={handleChange}
-                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            rows={4}
+                            className="mt-1 block w-full border-2  sm:text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="Describe the location..."
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-semibold">Your Review</label>
+                        <label className="block text-sm font-medium text-gray-700">Your Review</label>
                         <input
                             type="text"
                             name="additionalDetails"
                             value={formData.additionalDetails}
                             onChange={handleChange}
-                            className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring focus:border-indigo-500"
+                            className="mt-1 block w-full h-12 border-2 sm:text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="Share your experience..."
                         />
                     </div>
 
-                    <div className="flex justify-center items-center space-x-2">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                            <span
-                                key={star}
-                                className={`text-3xl cursor-pointer ${formData.rating >= star ? 'text-yellow-400' : 'text-gray-400'}`}
-                                onClick={() => handleRating(star)}
-                            >
-                                ★
-                            </span>
-                        ))}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Rating</label>
+                        <div className="flex items-center">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <Star
+                                    key={star}
+                                    className={`h-8 w-8 cursor-pointer ${formData.rating >= star ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                                    onClick={() => handleRating(star)}
+                                />
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="flex justify-center">
-                        <button type="submit" className="px-6 py-3 bg-indigo-500 text-white rounded-lg shadow hover:bg-indigo-700 transition-all duration-300">
-                            Submit
+                    <div className="flex justify-end">
+                        <button type="submit" className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <Send className="h-5 w-5 mr-2" />
+                            Submit Location
                         </button>
                     </div>
                 </form>

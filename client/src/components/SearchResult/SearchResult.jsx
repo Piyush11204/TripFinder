@@ -17,7 +17,7 @@ const SearchResult = ({ searchResults }) => {
 
     return (
         visible && (
-            <div className="absolute top-full left-0 w-full max-w-lg z-50 p-2 bg-white rounded-lg shadow-lg">
+            <div className="absolute top-full left-0 w-full max-w-lg z-50 p-2  rounded-lg ">
                 {searchResults.length > 0 ? (
                     <div className="flex flex-col">
                         <button 
@@ -48,7 +48,7 @@ const SearchResult = ({ searchResults }) => {
                         </div>
                     </div>
                 ) : (
-                    <div className="text-gray-600 text-center">
+                    <div className="text-gray-600 hidden text-center">
                         <p>No results found.</p>
                     </div>
                 )}
