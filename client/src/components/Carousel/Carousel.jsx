@@ -96,8 +96,10 @@ const Carousel = () => {
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
               <p className="text-white text-xl font-bold">{item.text}</p>
               <p className="text-white text-lg">{item.subheadline}</p>
-              <button className="text-white underline mt-2 flex items-center" onClick={togglePopup}>
-                <Info size={16} className="mr-1" /> View More
+
+              <button className="text-white px-2 py-1  mt-2 bg-purple-500 flex rounded-full  items-center" onClick={togglePopup}>
+                <Info className='mr-1' />
+                 View More
               </button>
             </div>
           </div>
