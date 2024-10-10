@@ -44,17 +44,29 @@ const ReviewCard = ({ review }) => (
   </div>
 );
 
-const MarqueeReviews = ({ reviews, direction }) => (
-  <div className="overflow-hidden py-4">
-    <div className={`flex space-x-6 ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}`}>
-      {reviews.concat(reviews).map((review, index) => (
-        <div key={`${review.id}-${index}`} className="flex-shrink-0 w-[300px]">
-          <ReviewCard review={review} />
-        </div>
-      ))}
+const MarqueeReviews = ({ reviews, direction }) => {
+  return (
+    <div className="overflow-hidden py-4 relative">
+      <div
+        className={`flex space-x-6 ${
+          direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'
+        }`}
+        style={{
+          animationDuration: '10s', // Increase this for faster speed
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {/* Duplicate reviews array to create infinite loop */}
+        {[...reviews, ...reviews].map((review, index) => (
+          <div key={`${review.id}-${index}`} className="flex-shrink-0 w-[300px]">
+            <ReviewCard review={review} />
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
 
 const TripvanaReviewPage = () => {
   const [newReview, setNewReview] = useState({ name: '', review: '', rating: 5 });
@@ -123,11 +135,11 @@ const TripvanaReviewPage = () => {
         </form>
       </div>
 
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {dummyReviews.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

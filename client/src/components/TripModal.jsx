@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X, MapPin, Clock, Plane, Car, Camera, Wind, Mountain, Utensils } from 'lucide-react';
 
 const IconMap = {
@@ -6,14 +6,51 @@ const IconMap = {
 };
 
 const TripModal = ({ isOpen, onClose, trip }) => {
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [bookingData, setBookingData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
+  const [bookingStatus, setBookingStatus] = useState(null);
+
   if (!isOpen || !trip) return null;
 
   const totalExpenses = Object.values(trip.expenses).reduce((a, b) => a + b, 0);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBookingData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleBookingSubmit = async (e) => {
+    e.preventDefault();
+    setBookingStatus('loading');
+
+    try {
+      const response = await fetch('/api/sendBookingEmail', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...bookingData, trip }),
+      });
+
+      if (response.ok) {
+        setBookingStatus('success');
+        // Clear booking data
+        setBookingData({ name: '', email: '', phone: '' });
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      setBookingStatus('error');
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white rounded-2xl shadow-2xl w-11/12 max-w-6xl p-6 max-h-[85vh] mt-20 overflow-y-auto">
-        {/* Use purple-500 for the background and white text */}
         <div className="bg-purple-500 text-white p-6 rounded-t-2xl -m-6 mb-6">
           <div className="flex justify-between items-center">
             <h2 className="text-4xl font-bold">{trip.title}</h2>
@@ -93,14 +130,86 @@ const TripModal = ({ isOpen, onClose, trip }) => {
           </div>
         </div>
 
-        <div className="mt-8 flex justify-end space-x-4">
-          <button onClick={onClose} className="px-6 py-3 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition duration-300">
-            Close
-          </button>
-          <button className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition duration-300">
-            Book This Trip
-          </button>
-        </div>
+        {!showBookingForm ? (
+          <div className="mt-8 flex justify-end space-x-4">
+            <button onClick={onClose} className="px-6 py-3 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition duration-300">
+              Close
+            </button>
+            <button 
+              onClick={() => setShowBookingForm(true)} 
+              className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition duration-300"
+            >
+              Book This Trip
+            </button>
+          </div>
+        ) : (
+          <div className="mt-6">
+            <h3 className="text-2xl font-semibold mb-4 text-purple-600">Book Your Trip</h3>
+            <form onSubmit={handleBookingSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={bookingData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={bookingData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={bookingData.phone}
+                  onChange={handleInputChange}
+                  required
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                />
+              </div>
+              <div>
+                <p className="text-lg font-semibold">Total Amount: ${totalExpenses}</p>
+              </div>
+              {bookingStatus === 'success' && (
+                <p className="text-green-600 font-semibold">
+                  Booking successful! An email confirmation has been sent.
+                </p>
+              )}
+              {bookingStatus === 'error' && (
+                <p className="text-red-600 font-semibold">
+                  An error occurred while processing your booking. Please try again.
+                </p>
+              )}
+              <div className="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  onClick={() => setShowBookingForm(false)}
+                  className="px-6 py-3 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition duration-300"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition duration-300">
+                  Submit Booking
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-// WishList.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -34,25 +33,27 @@ const WishList = () => {
     }, []);  // Empty dependency array to run once on mount
 
     return (
-        <div className="wishlist-container">
-            <h1>Wishlist</h1>
-            <h1>Wishlist</h1>
-            <h1>Wishlist</h1>
-            <h1>Wishlist</h1>
-            <h1>Wishlist</h1>
-            {error && <p className="error-message">{error}</p>}  {/* Display error message if any */}
+        <div className="wishlist-container max-w-3xl my-24 mx-auto p-6 bg-white shadow-md rounded-lg">
+            <h1 className="text-2xl font-bold mb-4 text-center">My Wishlist</h1>
 
-            <ul className="location-list">
-                {/* Display fetched locations */}
-                {locations.map(location => (
-                    <li key={location._id} className="location-item">
-                        <h2>{location.name}</h2>
-                        <p>{location.description}</p>
-                        <p>Type: {location.locationType}</p>
-                        <p>Station: {location.station}</p>
-                        <p>Rating: {location.rating}</p>
-                    </li>
-                ))}
+            {/* Display error message if any */}
+            {error && <p className="error-message text-red-500 mb-4">{error}</p>}
+
+            {/* Display fetched locations in a list */}
+            <ul className="location-list space-y-4">
+                {locations.length > 0 ? (
+                    locations.map(location => (
+                        <li key={location._id} className="location-item p-4 border rounded-lg shadow hover:shadow-lg transition-shadow">
+                            <h2 className="text-xl font-semibold">{location.name}</h2>
+                            <p className="text-gray-600">{location.description}</p>
+                            <p><strong>Type:</strong> {location.locationType}</p>
+                            <p><strong>Station:</strong> {location.station}</p>
+                            <p><strong>Rating:</strong> {location.rating}</p>
+                        </li>
+                    ))
+                ) : (
+                    <p className="text-gray-500 ">No locations added to the wishlist yet.</p>
+                )}
             </ul>
         </div>
     );
