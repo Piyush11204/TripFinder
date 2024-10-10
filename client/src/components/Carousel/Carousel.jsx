@@ -88,67 +88,46 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative w-full h-[600px] overflow-hidden" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className="relative w-full h-[400px] sm:h-[600px] overflow-hidden" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="flex transition-transform duration-500 ease-in-out h-full" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {carouselData.map((item, index) => (
           <div key={index} className="w-full h-full flex-shrink-0 relative">
             <img src={item.image} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-              <p className="text-white text-xl font-bold">{item.text}</p>
-              <p className="text-white text-lg">{item.subheadline}</p>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 sm:p-6">
+              <p className="text-white text-lg sm:text-xl font-bold">{item.text}</p>
+              <p className="text-white text-sm sm:text-lg">{item.subheadline}</p>
 
-              <button className="text-white px-2 py-1  mt-2 bg-purple-500 flex rounded-full  items-center" onClick={togglePopup}>
+              <button className="text-white px-2 py-1 mt-2 bg-purple-500 flex rounded-full items-center" onClick={togglePopup}>
                 <Info className='mr-1' />
                  View More
               </button>
             </div>
+            {isPopupVisible && (
+              <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
+                <div className="bg-white p-6 rounded-lg max-w-md w-full h-auto overflow-auto">
+                  <button className="absolute top-4 right-4 text-gray-600 hover:text-gray-900" onClick={togglePopup}>
+                    <X />
+                  </button>
+                  <h2 className="text-xl font-bold mb-2">{item.text}</h2>
+                  <p className="mb-4">{item.description}</p>
+                  <p className="flex items-center mb-2"><MapPin className='mr-2' /> {item.location}</p>
+                  <p className="flex items-center mb-2"><Activity className='mr-2' /> Activities: {item.activities.join(', ')}</p>
+                  <p className="flex items-center mb-2"><Calendar className='mr-2' /> Best time to visit: {item.bestTimeToVisit}</p>
+                  <div className="w-full h-60 sm:h-80">
+                    <iframe src={item.mapUrl} width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"></iframe>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
-
-      <button className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 transition-all duration-200" onClick={prevSlide}>
-        <ChevronLeft className="text-black" size={24} />
+      <button className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition" onClick={prevSlide}>
+        <ChevronLeft />
       </button>
-      <button className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 transition-all duration-200" onClick={nextSlide}>
-        <ChevronRight className="text-black" size={24} />
+      <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition" onClick={nextSlide}>
+        <ChevronRight />
       </button>
-
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {carouselData.map((_, index) => (
-          <button key={index} className={`w-3 h-3 rounded-full transition-all duration-200 ${index === currentIndex ? 'bg-white' : 'bg-white bg-opacity-50'}`} onClick={() => setCurrentIndex(index)} />
-        ))}
-      </div>
-
-      {isPopupVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50 transition-opacity duration-300">
-          <div className="bg-white mt-20 p-6 rounded-lg relative max-w-2xl w-full max-h-[80vh] overflow-y-auto transform transition-transform duration-300 scale-100 opacity-100">
-            <button className="absolute top-2 right-2 text-gray-600 hover:text-gray-800" onClick={togglePopup}>
-              <X size={24} />
-            </button>
-            
-            <img src={carouselData[currentIndex].image} alt={carouselData[currentIndex].text} className="w-full h-48 object-cover rounded-lg mb-4" />
-
-            <h2 className="text-xl font-bold mb-2">{carouselData[currentIndex].text}</h2>
-            <p className="text-lg mb-2">{carouselData[currentIndex].subheadline}</p>
-            <p className="mb-4 text-sm">{carouselData[currentIndex].description}</p>
-
-            <div className="flex items-center mb-2">
-              <MapPin size={16} className="mr-2" /> 
-              <span className="text-gray-700">{carouselData[currentIndex].location}</span>
-            </div>
-            <div className="flex items-center mb-2">
-              <Calendar size={16} className="mr-2" />
-              <span className="text-gray-700">Best time to visit: {carouselData[currentIndex].bestTimeToVisit}</span>
-            </div>
-            <div className="flex items-center mb-2">
-              <Activity size={16} className="mr-2" />
-              <span className="text-gray-700">Popular activities: {carouselData[currentIndex].activities.join(', ')}</span>
-            </div>
-
-            <iframe src={carouselData[currentIndex].mapUrl} width="100%" height="300" style={{ border: 0 }} allowFullScreen="" loading="lazy" />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

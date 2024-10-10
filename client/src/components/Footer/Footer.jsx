@@ -34,10 +34,12 @@ const Footer = () => {
             {/* Footer Content */}
             <div className="max-w-7xl mx-auto flex justify-between flex-wrap px-3">
                 <div className="mb-8">
-                    <div className="flex items-center">
-                        <img className="w-20 mb-4" src={logoDevtalk} alt="Logo" />
-                        <Link to="/Home">
-                            <h1 className="text-5xl font-ethnocentric text-white drop-shadow-lg">Trip<span className="text-purple-500">vana</span></h1>
+                    <div className="flex items-center justify-between md:justify-start">
+                        <Link to="/Home" className="ml-2 flex mx-auto md:ml-4">
+                        <img className="w-16 h-16 md:w-20 md:h-20 md:mb-4" src={logoDevtalk} alt="Logo" />
+                            <h1 className="text-3xl mt-5 md:text-5xl font-ethnocentric text-white drop-shadow-lg">
+                                Trip<span className="vana">vana</span>
+                            </h1>
                         </Link>
                     </div>
                     <p className="text-lg font-semibold mt-4">
@@ -50,7 +52,7 @@ const Footer = () => {
                                 <FontAwesomeIcon icon={faFacebook} className="h-6 " />
                             </a>
                             <a href="https://www.instagram.com" className="bg-pink-500 border-2 w-10 h-10 p-1.5 rounded-full" target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon icon={faInstagram} className="h-6 "  />
+                                <FontAwesomeIcon icon={faInstagram} className="h-6 " />
                             </a>
                             <a href="https://www.github.com" className="bg-gray-800 border-2 h-10 w-10 p-1.5 rounded-full" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon icon={faGithub} className="h-6 " />
