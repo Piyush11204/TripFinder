@@ -288,7 +288,7 @@ const Home = () => {
         <h1 className="text-5xl font-bold text-center text-purple-800 mb-12 animate-fade-in">
           Destinations You'll Love to Explore
         </h1>
-        <h1 className='text-3xl font-semibold text-purple-500 my-5 ml-4'>Internaltional Trips </h1>
+        <h1 className='text-3xl font-semibold text-purple-500 my-5 ml-4'>International Trips </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {trips.map((trip, index) => (

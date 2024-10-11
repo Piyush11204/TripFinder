@@ -118,7 +118,7 @@ const Navbar = () => {
                     </div>
                     <SearchResult searchResults={searchResults} />
                 </div>
-                <div id="google_translate_element" />
+                <div id="google_translate_element"/>
 
                 {currentUser ? (
                     <div className="hidden md:flex items-center gap-4">

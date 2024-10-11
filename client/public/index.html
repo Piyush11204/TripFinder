@@ -1,35 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Tripvana - Your Travel Companion" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
     <title>Tripvana</title>
-  </head>
+    <style>
+        /* Improved Loader styles */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
 
- 
-  <body>
+        .loader {
+            text-align: center;
+        }
+
+        .loader h1 {
+            font-family: Arial, sans-serif;
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background-color: #e0e0e0;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background-color: #3498db;
+            position: absolute;
+            top: 0;
+            left: -40%;
+            animation: loading 2.5s infinite ease-in-out;
+        }
+
+        @keyframes loading {
+            0% { left: -40%; }
+            100% { left: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="loader-container" id="loader">
+        <div class="loader">
+            <h1>Tripvana</h1>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
     <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-      autoDisplay: false,
-    }, 'google_translate_element');
-  }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false,
+            }, 'google_translate_element');
+
+        }
+
+        window.addEventListener('load', function() {
+            document.getElementById('loader').style.display = 'none';
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-  </body>
+</body>
 </html>
