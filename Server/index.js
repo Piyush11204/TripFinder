@@ -10,6 +10,8 @@ const profileRoutes = require('./routes/profile')
 const searchRoutes = require('./routes/Search');
 const WishlistRoutes = require('./routes/locationRoutes'); 
 const ContactRoutes = require('./models/contact.model');
+const emailRouter = require('./routes/email.routes.js')
+const hotelRoutes = require('./routes/hotelsRoute.route.js')
 
 const app = express();
 app.use(express.static('static'))
@@ -29,5 +31,7 @@ app.use('/api/users/me' ,profileRoutes)
 app.use('/api', searchRoutes);
 app.use('/api', WishlistRoutes)
 app.use('/api/contact', ContactRoutes)
+app.use('/api/v1/send-email', emailRouter)
+app.use('/api/v1/hotels', hotelRoutes);
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

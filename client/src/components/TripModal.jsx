@@ -28,7 +28,7 @@ const TripModal = ({ isOpen, onClose, trip }) => {
     setBookingStatus('loading');
 
     try {
-      const response = await fetch('/api/sendBookingEmail', { 
+      const response = await fetch('http://localhost:8080/api/v1/send-email', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

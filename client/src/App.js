@@ -13,6 +13,7 @@ import WishList from "./Pages/Wishlist Page/WishList";
 import ContactUs from "./Pages/ContactUs/Contact";
 import TripModal from "./components/TripModal";
 import TripvanaReviewPage from "./Pages/TripvanaReviewPage/TripvanaReviewPage";
+import Hotels from "./Pages/Hotels/Hotels.jsx";
 
 function App() {
 	const user = localStorage.getItem("token");
@@ -30,6 +31,8 @@ function App() {
 			<Route path="/contact" element={<ContactUs />}/>
 			<Route path="/blog" element={<TripvanaReviewPage />}/>
 			<Route path="/trip/:title" component={TripModal} />
+			<Route path="/Hotels"  element={<Hotels />} />
+
 
 			
 			{user && <Route path="/" exact element={<Home />} />}

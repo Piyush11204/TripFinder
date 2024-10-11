@@ -93,9 +93,10 @@ const Navbar = () => {
                 </div>
 
                 <div className="hidden md:flex items-center gap-6 text-white font-semibold">
-                    <Link to="/aboutus" className="hover:text-purple-300">About Us</Link>
-                    <Link to="/addLocation" className="hover:text-purple-300">Add Location</Link>
-                    <Link to="/contact" className="hover:text-purple-300">Contact</Link>
+                    <Link to="/Hotels" className="hover:text-purple-300 font-bold">Hotels</Link>
+                    <Link to="/addLocation" className="hover:text-purple-300 font-bold">Add Location</Link>
+                    <Link to="/aboutus" className="hover:text-purple-300 font-bold">About Us</Link>
+                    <Link to="/contact" className="hover:text-purple-300 font-bold">Contact</Link>
                     <Link to="/Blog" className="hover:text-purple-300 font-bold">Blogs</Link>
                 </div>
 
@@ -179,6 +180,7 @@ const Navbar = () => {
             {isMobileMenuOpen && (
                 <div className="md:hidden bg-gray-800 text-white p-4">
                     <div className="flex flex-col space-y-4">
+                        <Link to="/Hotels" className="hover:text-purple-300 font-bold">Hotels</Link>
                         <Link to="/aboutus" className="hover:text-purple-300">About Us</Link>
                         <Link to="/addLocation" className="hover:text-purple-300">Add Location</Link>
                         <Link to="/contact" className="hover:text-purple-300">Contact</Link>
