@@ -17,7 +17,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #f0f0f0;
+            background-color: rgba(240, 240, 240, 0.8); /* Slight transparency */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -31,7 +31,7 @@
         .loader h1 {
             font-family: Arial, sans-serif;
             font-size: 48px;
-            color: #333;
+            color: #4a3f8e; /* Dark purple color */
             margin-bottom: 20px;
         }
 
@@ -42,6 +42,7 @@
             margin: 0 auto;
             position: relative;
             overflow: hidden;
+            border-radius: 5px; /* Rounded corners */
         }
 
         .loader-bar::after {
@@ -49,7 +50,7 @@
             display: block;
             width: 40%;
             height: 100%;
-            background-color: #3498db;
+            background-color: #3498db; /* Blue color */
             position: absolute;
             top: 0;
             left: -40%;
@@ -61,6 +62,88 @@
             100% { left: 100%; }
         }
 
+        /* Hide Google Translate toolbar */
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+
+        /* Hide the Google Translate logo and powered by Google text */
+        .goog-logo-link {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            font-size: 0px; /* Hide the text but retain functionality */
+        }
+
+        /* Optional: Prevents the layout from being affected by hidden elements */
+        #google_translate_element {
+            height: auto;
+            display: inline-block;
+            background: none;
+            color: transparent;
+        }
+
+        .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        /* Hide Google branding in the translation dropdown */
+        .goog-te-menu2 {
+            display: none !important;
+        }
+
+        /* Optional: Style the dropdown for a cleaner look */
+        .goog-te-menu-value {
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Modify the dropdown button appearance for a smaller size */
+        .goog-te-combo {
+            padding: 5px; /* Reduce padding */
+            border-radius: 5px;
+            background-color: #7b5bde;
+            color: white;
+            border: none;
+            font-size: 12px; /* Smaller font size */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 150px; /* Fixed width for the dropdown */
+        }
+
+        .goog-te-combo:hover {
+            background-color: #6e4fa8; /* Darker purple on hover */
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .loader h1 {
+                font-size: 36px; /* Smaller font size on mobile */
+            }
+
+            .loader-bar {
+                width: 150px; /* Adjust width for mobile */
+            }
+
+            .goog-te-combo {
+                width: 100%; /* Full width dropdown on mobile */
+                font-size: 12px; /* Smaller font size */
+            }
+        }
+        @font-face {
+            font-family: 'Ethnocentric';
+            src: url('path/to/ethnocentric.woff2') format('woff2'),
+                 url('path/to/ethnocentric.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'Ethnocentric', sans-serif; /* Fallback to sans-serif */
+        }
     </style>
 </head>
 <body>
@@ -70,14 +153,22 @@
             <div class="loader-bar"></div>
         </div>
     </div>
+
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false,
+                autoDisplay: false
             }, 'google_translate_element');
 
+            // Hide the Google Translate toolbar after initialization
+            setTimeout(function() {
+                var banner = document.querySelector('.skiptranslate');
+                if (banner) {
+                    banner.style.display = 'none';
+                }
+            }, 500); // Adjust timing as necessary
         }
 
         window.addEventListener('load', function() {
