@@ -30,7 +30,7 @@ app.use('/api/addlocation', locationRoutes);
 app.use('/api/users/me' ,profileRoutes) 
 app.use('/api', searchRoutes);
 app.use('/api', WishlistRoutes)
-app.use('/api/contact', ContactRoutes)
+app.use('/api', ContactRoutes)
 app.use('/api/v1/send-email', emailRouter)
 app.use('/api/v1/hotels', hotelRoutes);
 const port = process.env.PORT || 8080;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Star, MapPin, DollarSign, Bed, Search, X, Globe, Phone, Mail } from 'lucide-react';
+import { Star, MapPin, DollarSign, Bed, Search, X, Phone, Mail } from 'lucide-react';
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
@@ -28,6 +28,7 @@ const Hotels = () => {
 
   const API = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
+  // Filter hotels by country and search term
   const filteredHotels = hotels.filter(hotel => {
     const countryMatch = !selectedCountry || hotel.city.toLowerCase() === selectedCountry.toLowerCase();
     const nameMatch = hotel.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -51,7 +52,7 @@ const Hotels = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 bg-gray-100 min-h-screen">
-      <h1 className="text-5xl font-extrabold text-center m-12 text-violet-500 animate-fade-in-down">
+      <h1 className="text-5xl font-extrabold font-ethnocentric text-center m-12 text-violet-500 animate-fade-in-down">
         Discover Our Hotels
       </h1>
 
@@ -61,8 +62,8 @@ const Hotels = () => {
           onChange={(e) => setSelectedCountry(e.target.value)}
           className="px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500"
         >
+          <option  value="India">India</option>
           <option value="">All Countries</option>
-          <option value="India">India</option>
           <option value="United States">United States</option>
           <option value="Canada">Canada</option>
           <option value="France">France</option>
@@ -86,83 +87,121 @@ const Hotels = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredHotels.map((hotel) => (
-          <div key={hotel.hotel_id} className="border border-gray-300 rounded-lg p-4 hover:shadow-2xl transition-all duration-300">
-            <h2 className="text-lg font-semibold">{hotel.name}</h2>
-            <p className="text-sm text-gray-600 mb-2">{hotel.address}</p>
-            <p className="text-sm text-gray-600 mb-4 line-clamp-3">{hotel.hotel_description}</p>
-            <div className="flex items-center mb-2 text-yellow-500">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-current" />
-              ))}
-            </div>
-            <div className="flex items-center mb-2">
-              <MapPin className="w-4 h-4 text-blue-500 mr-2" />
-              <p className="text-sm text-gray-700">{hotel.city}, {hotel.country.toUpperCase()}</p>
-            </div>
-            <div className="flex items-center mb-2">
-              <DollarSign className="w-4 h-4 text-green-500 mr-2" />
-              <p className="text-sm text-gray-700">{hotel.currency}</p>
-            </div>
-            <div className="flex items-center mb-4">
-              <Bed className="w-4 h-4 text-purple-500 mr-2" />
-              <p className="text-sm text-gray-700">{hotel.number_of_rooms} room(s)</p>
-            </div>
-            <div className="flex justify-between">
-              <button onClick={() => setSelectedHotel(hotel)} className="px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition">
-                View Details
-              </button>
-              <button>
-                <a href={hotel.url} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+          <div key={hotel.hotel_id} className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <div className="p-6 h-full flex flex-col justify-between">
+              <div>
+                <h2 className="text-2xl font-semibold mb-3 text-gray-800">{hotel.name}</h2>
+                <p className="text-sm text-gray-600 mb-4 line-clamp-3">{hotel.hotel_description}</p>
+                <div className="flex items-center mb-2 text-yellow-500">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <div className="flex items-center mb-2">
+                  <MapPin className="w-4 h-4 text-blue-500 mr-2" />
+                  <p className="text-sm text-gray-700">{hotel.city}, {hotel.country.toUpperCase()}</p>
+                </div>
+                <div className="flex items-center mb-2">
+                  <DollarSign className="w-4 h-4 text-green-500 mr-2" />
+                  <p className="text-sm text-gray-700">{hotel.currency}</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <Bed className="w-4 h-4 text-purple-500 mr-2" />
+                  <p className="text-sm text-gray-700">{hotel.number_of_rooms} room(s)</p>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={() => setSelectedHotel(hotel)}
+                  className="inline-block bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors duration-300 text-center font-semibold uppercase tracking-wide transform hover:scale-105"
+                >
+                  View Details
+                </button>
+                <a
+                  href={hotel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition-colors duration-300 text-center font-semibold uppercase tracking-wide transform hover:scale-105"
+                >
                   Book Now
                 </a>
-              </button>
+              </div>
             </div>
           </div>
         ))}
       </div>
 
       {selectedHotel && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
-          <div className="bg-white rounded-lg w-full max-w-3xl p-4 max-h-[90vh] overflow-hidden">
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-semibold">{selectedHotel.name}</h2>
-              <button onClick={() => setSelectedHotel(null)}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4">
+          <div className="bg-white rounded-xl mt-20 p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-3xl font-bold">{selectedHotel.name}</h2>
+              <button onClick={() => setSelectedHotel(null)} className="text-gray-500 hover:text-gray-700">
                 <X size={24} />
               </button>
             </div>
-            <p className="text-sm text-gray-600 mb-2">{selectedHotel.address}</p>
-            <div>
-              <h3 className="font-semibold">Details</h3>
-              <p>{selectedHotel.hotel_description}</p>
-              <h3 className="font-semibold">Price</h3>
-              <p>{selectedHotel.currency}</p>
-              <h3 className="font-semibold">Rooms</h3>
-              <p>{selectedHotel.number_of_rooms}</p>
-              <h3 className="font-semibold">Rating</h3>
-              <div className="flex text-yellow-500">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
+            {selectedHotel.image && (
+              <img
+                src={selectedHotel.image}
+                alt={selectedHotel.name}
+                className="w-full h-64 object-cover rounded-lg mb-4"
+              />
+            )}
+            <p className="text-gray-600 mb-4">{selectedHotel.hotel_description}</p>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <h3 className="font-semibold">Location</h3>
+                <p>{selectedHotel.city}, {selectedHotel.country}</p>
               </div>
-              <h3 className="font-semibold">Languages</h3>
-              <p>{selectedHotel.spoken_languages}</p>
-            </div>
-            <div className="flex justify-between mt-4">
-              <div className="flex space-x-4">
-                <button className="px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition">
-                  <a href={`tel:+91 83298 54765`}><Phone className="mr-2" size={16} /> Call</a>
-                </button>
-                <button className="px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition">
-                  <a href={`mailto:info@${selectedHotel.name.toLowerCase().replace(/\s/g, '')}.com`}><Mail className="mr-2" size={16} /> Email</a>
-                </button>
-                <button className="px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition">
-                  <a href={selectedHotel.url} target="_blank" rel="noopener noreferrer"><Globe className="mr-2" size={16} /> Website</a>
-                </button>
+              <div>
+                <h3 className="font-semibold">Price</h3>
+                <p>{selectedHotel.currency}</p>
               </div>
-              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                <a href={selectedHotel.url} target="_blank" rel="noopener noreferrer">Book Now</a>
-              </button>
+              <div>
+                <h3 className="font-semibold">Rooms</h3>
+                <p>{selectedHotel.number_of_rooms}</p>
+              </div>
+              <div>
+                <h3 className="font-semibold">Rating</h3>
+                <div className="flex text-yellow-500">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+              </div>
             </div>
+            <div className="flex space-x-4 mb-4">
+              <a
+                href={`tel:+91 7558565929`} 
+                className="inline-flex items-center px-4 py-2 border border-blue-500 text-blue-500 rounded-full hover:bg-blue-500 hover:text-white transition"
+              >
+                <Phone className="mr-2" size={16} /> Call
+              </a>
+              <a
+                href={`mailto:info@${selectedHotel.name.toLowerCase().replace(/\s/g, '')}.com`} // Use a relevant email address
+                className="inline-flex items-center px-4 py-2 border border-green-500 text-green-500 rounded-full hover:bg-green-500 hover:text-white transition"
+              >
+                <Mail className="mr-2" size={16} /> Email
+              </a>
+            </div>
+            <iframe
+              src={`https://www.google.com/maps/embed/v1/place?key=${API}&q=${encodeURIComponent(selectedHotel.name + ' ' + selectedHotel.city + ' ' + selectedHotel.country)}`}
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="rounded-lg mb-4"
+            ></iframe>
+            <a
+              href={selectedHotel.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors duration-300 text-center font-semibold uppercase tracking-wide"
+            >
+              Book Now
+            </a>
           </div>
         </div>
       )}
