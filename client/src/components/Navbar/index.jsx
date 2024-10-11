@@ -101,7 +101,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center">
-                    <div className="relative hidden md:block">
+                    <div className="relative hidden ml-10 md:block">
                         <input
                             type="search"
                             placeholder="Adventure Awaits – Find It Here"
@@ -118,6 +118,7 @@ const Navbar = () => {
                     </div>
                     <SearchResult searchResults={searchResults} />
                 </div>
+                <div id="google_translate_element" />
 
                 {currentUser ? (
                     <div className="hidden md:flex items-center gap-4">

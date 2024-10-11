@@ -63,6 +63,7 @@ const Hotels = () => {
           className="px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500"
         >
           <option value="">All Countries</option>
+          <option value="India">India</option>
           <option value="United States">United States</option>
           <option value="Canada">Canada</option>
           <option value="France">France</option>
@@ -70,7 +71,6 @@ const Hotels = () => {
           <option value="Japan">Japan</option>
           <option value="Brazil">Brazil</option>
           <option value="Australia">Australia</option>
-          <option value="India">India</option>
         </select>
 
         <div className="relative">
