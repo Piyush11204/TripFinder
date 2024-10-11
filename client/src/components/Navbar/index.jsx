@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { LogIn, Menu, X, Search, Heart } from "lucide-react";
+import { LogIn, Menu, X, Search } from "lucide-react";
 import SearchResult from "../SearchResult/SearchResult";
 import "./Navbar.css";
 import logo from '../../img/Titlelogo2.png';
@@ -114,7 +114,7 @@ const Navbar = () => {
                     <NavLink to="/Blog">Blogs</NavLink>
                 </div>
 
-                <div className="flex items-center">
+                <div className="flex items-center mr-12">
                     <div className="relative hidden ml-10 md:block">
                         <input
                             type="search"
@@ -124,7 +124,7 @@ const Navbar = () => {
                             className="py-1 border-b-2 border-gray-500 focus:border-purple-400 outline-none bg-transparent text-white placeholder-gray-400 w-48 lg:w-72"
                         />
                         <button
-                            className="ml-2 px-3 py-1 text-sm text-white border-2 border-purple-500 rounded-full hover:bg-purple-500 hover:text-gray-900 transition-all duration-300"
+                            className="px-3 py-1 text-sm text-white border-2 border-purple-500 rounded-full hover:bg-purple-500 hover:text-gray-900 transition-all duration-300"
                             onClick={handleSearch}
                         >
                             Search
@@ -132,13 +132,10 @@ const Navbar = () => {
                     </div>
                     <SearchResult searchResults={searchResults} />
                 </div>
-                <div id="google_translate_element"/>
+                <div id="google_translate_element" />
 
                 {currentUser ? (
                     <div className="hidden md:flex items-center gap-4">
-                        <Link to="/wishlist" className="text-white hover:text-purple-300 transition-colors duration-300">
-                            <Heart />
-                        </Link>
                         <div className="relative cursor-pointer" onClick={toggleDropdown}>
                             <div className="flex items-center space-x-2">
                                 {currentUser.profileImage ? (
@@ -200,6 +197,23 @@ const Navbar = () => {
                         <Link to="/addLocation" className="hover:text-purple-300 transition-colors duration-300">Add Location</Link>
                         <Link to="/contact" className="hover:text-purple-300 transition-colors duration-300">Contact</Link>
                         <Link to="/Blog" className="hover:text-purple-300 font-bold transition-colors duration-300">Blogs</Link>
+
+                        {/* Display user initials if logged in */}
+                        {currentUser ? (
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-semibold border-2 border-purple-400">
+                                    {currentUser.firstName[0]} {/* Show first initial */}
+                                </div>
+                                <span className="ml-2">{currentUser.firstName} {currentUser.lastName}</span>
+                            </div>
+                        ) : (
+                            <Link to="/signup" className="w-full">
+                                <button className="w-full flex items-center justify-center px-4 py-2 bg-purple-600 text-white rounded-full shadow-md hover:bg-purple-700 transition duration-300">
+                                    <LogIn className="w-5 h-5 mr-2" /> Login
+                                </button>
+                            </Link>
+                        )}
+
                         <div className="relative">
                             <input
                                 type="search"
@@ -215,12 +229,9 @@ const Navbar = () => {
                                 <Search size={20} />
                             </button>
                         </div>
-                        {currentUser ? (
+
+                        {currentUser && (
                             <>
-                                <Link to="/wishlist" className="flex items-center hover:text-purple-300 transition-colors duration-300">
-                                    <Heart className="text-white" />
-                                    <span className="ml-2">Wishlist</span>
-                                </Link>
                                 <Link to="/editProfile" className="text-purple-300 hover:underline transition-colors duration-300">Edit Profile</Link>
                                 <button
                                     className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition duration-300"
@@ -229,12 +240,6 @@ const Navbar = () => {
                                     Logout
                                 </button>
                             </>
-                        ) : (
-                            <Link to="/signup" className="w-full">
-                                <button className="w-full flex items-center justify-center px-4 py-2 bg-purple-600 text-white rounded-full shadow-md hover:bg-purple-700 transition duration-300">
-                                    <LogIn className="w-5 h-5 mr-2" /> Login
-                                </button>
-                            </Link>
                         )}
                     </div>
                 </div>

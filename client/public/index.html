@@ -10,6 +10,15 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Tripvana</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
         /* Improved Loader styles */
         .loader-container {
             position: fixed;
@@ -17,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(240, 240, 240, 0.8); /* Slight transparency */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,20 +38,21 @@
         }
 
         .loader h1 {
-            font-family: Arial, sans-serif;
-            font-size: 48px;
-            color: #4a3f8e; /* Dark purple color */
+            font-size: 68px;
+            color: #ffffff;
+            font-family: 'Ethnocentric', sans-serif; /* Fallback to sans-serif */
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .loader-bar {
             width: 200px;
             height: 4px;
-            background-color: #e0e0e0;
+            background-color: rgba(255,255,255,0.2);
             margin: 0 auto;
             position: relative;
             overflow: hidden;
-            border-radius: 5px; /* Rounded corners */
+            border-radius: 2px;
         }
 
         .loader-bar::after {
@@ -50,11 +60,11 @@
             display: block;
             width: 40%;
             height: 100%;
-            background-color: #3498db; /* Blue color */
+            background-color: #ffffff;
             position: absolute;
             top: 0;
             left: -40%;
-            animation: loading 2.5s infinite ease-in-out;
+            animation: loading 2s infinite ease-in-out;
         }
 
         @keyframes loading {
@@ -62,87 +72,77 @@
             100% { left: 100%; }
         }
 
-        /* Hide Google Translate toolbar */
-        .goog-te-banner-frame.skiptranslate {
-            display: none !important;
-        }
-
-        /* Hide the Google Translate logo and powered by Google text */
-        .goog-logo-link {
-            display: none !important;
+        /* Google Translate styles */
+        #google_translate_element {
+            position: fixed;
+            top: 16.2px;
+            right: 240px;
+            z-index: 1000;
+            
         }
 
         .goog-te-gadget {
-            font-size: 0px; /* Hide the text but retain functionality */
+            font-family: 'Poppins', sans-serif !important;
         }
 
-        /* Optional: Prevents the layout from being affected by hidden elements */
-        #google_translate_element {
-            height: auto;
-            display: inline-block;
-            background: none;
-            color: transparent;
+        .goog-te-gadget-simple {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border: none !important;
+            padding: 8px !important;
+            border-radius: 20px !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
         }
 
-        .goog-te-balloon-frame {
-            display: none !important;
+        .goog-te-gadget-simple:hover {
+            background-color: rgba(255, 255, 255, 0.2) !important;
         }
 
-        /* Hide Google branding in the translation dropdown */
-        .goog-te-menu2 {
-            display: none !important;
-        }
-
-        /* Optional: Style the dropdown for a cleaner look */
         .goog-te-menu-value {
-            padding: 5px 10px;
-            border-radius: 5px;
-            background-color: #f1f1f1;
-            color: #333;
-            font-weight: bold;
+            color: white !important;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 14px;
         }
 
-        /* Modify the dropdown button appearance for a smaller size */
-        .goog-te-combo {
-            padding: 5px; /* Reduce padding */
-            border-radius: 5px;
-            background-color: #7b5bde;
-            color: white;
-            border: none;
-            font-size: 12px; /* Smaller font size */
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 150px; /* Fixed width for the dropdown */
+        .goog-te-menu-value span {
+            color: white !important;
         }
 
-        .goog-te-combo:hover {
-            background-color: #6e4fa8; /* Darker purple on hover */
+        .goog-te-menu-frame {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
         }
 
-        /* Responsive styles */
+        /* Hide Google branding */
+        .goog-logo-link, .goog-te-gadget span {
+            display: none !important;
+        }
+
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
         @media (max-width: 768px) {
             .loader h1 {
-                font-size: 36px; /* Smaller font size on mobile */
+                font-size: 36px;
             }
 
             .loader-bar {
-                width: 150px; /* Adjust width for mobile */
+                width: 150px;
             }
 
-            .goog-te-combo {
-                width: 100%; /* Full width dropdown on mobile */
-                font-size: 12px; /* Smaller font size */
+            #google_translate_element {
+                top: 16px;
+                right: 45px;
             }
-        }
-        @font-face {
-            font-family: 'Ethnocentric';
-            src: url('path/to/ethnocentric.woff2') format('woff2'),
-                 url('path/to/ethnocentric.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body {
-            font-family: 'Ethnocentric', sans-serif; /* Fallback to sans-serif */
+
+            .goog-te-gadget-simple {
+                padding: 6px !important;
+            }
+
+            .goog-te-menu-value {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -154,6 +154,8 @@
         </div>
     </div>
 
+    
+
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -162,17 +164,22 @@
                 autoDisplay: false
             }, 'google_translate_element');
 
-            // Hide the Google Translate toolbar after initialization
+            // Customize the translate button text
             setTimeout(function() {
-                var banner = document.querySelector('.skiptranslate');
-                if (banner) {
-                    banner.style.display = 'none';
+                var translateElement = document.querySelector('.goog-te-menu-value span:first-child');
+                if (translateElement) {
+                    translateElement.innerHTML = 'Translate';
                 }
-            }, 500); // Adjust timing as necessary
+            }, 300);
         }
 
         window.addEventListener('load', function() {
-            document.getElementById('loader').style.display = 'none';
+            setTimeout(function() {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 2000); // Show loader for 2 seconds
         });
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
