@@ -6,30 +6,30 @@ const connection = require("./DB/db");
 const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 const locationRoutes = require('./routes/addLocation');
-const profileRoutes = require('./routes/profile')
-const searchRoutes = require('./routes/Search');
-const WishlistRoutes = require('./routes/locationRoutes'); 
-const ContactRoutes = require('./models/contact.model');
-const emailRouter = require('./routes/email.routes.js')
+const profileRoutes = require('./routes/profile');
+const searchRoutes = require('./routes/search');
+const ContactRoutes = require('./routes/contact.routes');   // Corrected this
+const emailRouter = require('./routes/email.routes.js');
 
 const app = express();
-app.use(express.static('static'))
-// Database connection
-connection();
+app.use(express.static('static'));
+
+connection()
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/addlocation', locationRoutes);
-app.use('/api/users/me' ,profileRoutes) 
+app.use('/api/users/me', profileRoutes);
 app.use('/api', searchRoutes);
-app.use('/api', WishlistRoutes)
-app.use('/api', ContactRoutes)
-app.use('/api/v1/send-email', emailRouter)
+app.use('/api', ContactRoutes);
+app.use('/api/v1/send-email', emailRouter);
+
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

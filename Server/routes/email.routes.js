@@ -19,12 +19,15 @@ let transporter = nodemailer.createTransport({
 router.post('/', (req, res) => {
     const { name, email, phone, trip } = req.body;
 
-    // Validate that 'email' is present in the request body
+    // Logging for troubleshooting
+    console.log("Request body:", req.body);
+    console.log("Email to send:", email);
+    console.log("Nodemailer transporter:", transporter);
+
     if (!email) {
         return res.status(400).json({ error: 'Recipient email is required' });
     }
 
-    // Format the itinerary and other trip details
     const formattedItinerary = trip.itinerary.map(day => {
         return `Day ${day.day}: ${day.activities.join(', ')}`;
     }).join('\n');
@@ -97,22 +100,17 @@ Your Travel Team
             <p>Best regards,</p>
             <p>Your Travel Team</p>
         `,
-        attachments: [
-            {
-                filename: 'invitation.pdf', // Example attachment
-                path: path.join(__dirname, 'invitation.pdf') // Ensure the file path is correct
-            }
-        ]
+        // attachments: [ ]
     };
 
     // Send email using the transporter
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error sending email:', error); // Log the error for debugging
-            return res.status(500).json({ error: 'Failed to send email' });
+            console.error('Error sending email:', error);
+            return res.status(500).json({ error: 'Failed to send email', details: error.message });
         }
         res.status(200).json({ message: 'Email sent successfully', info: info.response });
-        console.log('Request Body:', req.body);
+        console.log('Email sent response:', info.response);
     });
 });
 
