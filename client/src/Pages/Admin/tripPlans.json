@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Explore the Wonders of Bali",
+    "date": "20.09.2024",
+    "totalAmount": 2400,
+    "duration": "7 days, 6 nights"
+  },
+  {
+    "title": "European Adventure: 5 Countries in 10 Days",
+    "date": "10.10.2024",
+    "totalAmount": 3900,
+    "duration": "10 days, 9 nights"
+  },
+  {
+    "title": "Experience the Northern Lights in Norway",
+    "date": "15.11.2024",
+    "totalAmount": 3700,
+    "duration": "6 days, 5 nights"
+  },
+  {
+    "title": "Safari Adventure in Kenya",
+    "date": "05.12.2024",
+    "totalAmount": 4100,
+    "duration": "8 days, 7 nights"
+  }
+]

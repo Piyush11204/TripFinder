@@ -10,12 +10,16 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell
+  Cell,
+  ComposedChart,
+  Area,
+  Line,
+  Scatter
 } from 'recharts';
-import { UserPlus, Luggage, DollarSign, TrendingUp, MapPin, Globe } from 'lucide-react';
+import { UserPlus, MapPin, Globe, Building } from 'lucide-react';
 import axios from 'axios';
 
-// Fetch functions for dashboard data and users
+// Fetch functions
 const fetchDashboardData = async () => {
   try {
     const response = await fetch('http://localhost:8080/api/dashboard-data');
@@ -26,6 +30,30 @@ const fetchDashboardData = async () => {
   } catch (error) {
     console.error("Failed to fetch dashboard data:", error);
     return null;
+  }
+};
+
+
+const fetchHotelsData = async () => {
+  try {
+    const response = await fetch('./hotels.json');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch hotels data from JSON:", error);
+    return [];
+  }
+};
+
+const fetchInternationalTrips = async () => {
+  try {
+    const response = await import('./tripPlans.json');
+    return response.default.filter(trip => trip.title.includes('International'));
+  } catch (error) {
+    console.error("Failed to fetch international trips:", error);
+    return [];
   }
 };
 
@@ -49,6 +77,7 @@ const fetchUsersData = async () => {
   }
 };
 
+// Component definitions
 const Card = ({ title, value, icon: Icon }) => (
   <div className="bg-violet-100 p-4 rounded-lg shadow">
     <div className="flex justify-between items-center mb-2">
@@ -113,7 +142,7 @@ const ContactPage = ({ contacts }) => (
 );
 
 const LocationsTable = ({ data, searchTerm }) => {
-  const filteredData = data.filter(location => 
+  const filteredData = data.filter(location =>
     location.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     location.locationType.toLowerCase().includes(searchTerm.toLowerCase()) ||
     location.station.toLowerCase().includes(searchTerm.toLowerCase())
@@ -148,7 +177,7 @@ const LocationsTable = ({ data, searchTerm }) => {
 };
 
 const UsersTable = ({ data, searchTerm }) => {
-  const filteredData = data.filter(user => 
+  const filteredData = data.filter(user =>
     user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -176,6 +205,23 @@ const UsersTable = ({ data, searchTerm }) => {
   );
 };
 
+const HotelCard = ({ hotel }) => (
+  <div className="bg-white p-4 rounded-lg shadow-md">
+    <h3 className="text-lg font-semibold text-violet-800 mb-2">{hotel.name}</h3>
+    <p className="text-sm text-violet-600 mb-1">{hotel.address}, {hotel.city}</p>
+    <p className="text-sm text-violet-600 mb-1">Rooms: {hotel.number_of_rooms}</p>
+    {/* <p className="text-xs text-violet-500">{hotel.hotel_description}</p> */}
+  </div>
+);
+
+
+const findCities = (hotels, searchTerm) => {
+  const regex = new RegExp(searchTerm, 'i');
+  return hotels.filter(hotel => regex.test(hotel.city));
+};
+
+
+
 const Dashboard = () => {
   const [data, setData] = useState({
     dailyData: [],
@@ -185,14 +231,24 @@ const Dashboard = () => {
     internationalBookings: 0,
     contacts: [],
     users: [],
-    locations: []
+    locations: [],
+    hotels: [],
+    totalHotels: 0,
+    trips: [],
   });
   const [activeTab, setActiveTab] = useState('AllUsers');
   const [searchTerm, setSearchTerm] = useState('');
+  const [cityData, setCityData] = useState([]);
+ 
 
   useEffect(() => {
     const fetchData = async () => {
       const dashboardData = await fetchDashboardData();
+      const locationsData = await fetchLocationsData();
+      const usersData = await fetchUsersData();
+      const hotelsData = await fetchHotelsData();
+      const tripsData = await fetchInternationalTrips();
+
       if (dashboardData) {
         setData(prevData => ({
           ...prevData,
@@ -200,7 +256,6 @@ const Dashboard = () => {
         }));
       }
 
-      const locationsData = await fetchLocationsData();
       if (locationsData) {
         setData(prevData => ({
           ...prevData,
@@ -223,7 +278,6 @@ const Dashboard = () => {
         }));
       }
 
-      const usersData = await fetchUsersData();
       if (usersData) {
         setData(prevData => ({
           ...prevData,
@@ -231,8 +285,35 @@ const Dashboard = () => {
           totalUsers: usersData.length
         }));
       }
-    };
 
+      if (hotelsData) {
+        setData(prevData => ({
+          ...prevData,
+          hotels: hotelsData,
+          totalHotels: hotelsData.length
+        }));
+        if (tripsData) {
+          setData(prevData => ({
+            ...prevData,
+            trips: tripsData,
+            internationalBookings: tripsData.length
+          }));
+        }
+        // Process city data for the graph
+        const cityCount = hotelsData.reduce((acc, hotel) => {
+          acc[hotel.city] = (acc[hotel.city] || 0) + 1;
+          return acc;
+        }, {});
+
+        const cityDataArray = Object.entries(cityCount).map(([city, count]) => ({
+          city,
+          count
+        }));
+
+        setCityData(cityDataArray.sort((a, b) => b.count - a.count).slice(0, 10)); // Top 10 cities
+      }
+    };
+   
     fetchData();
     const intervalId = setInterval(fetchData, 300000);
     return () => clearInterval(intervalId);
@@ -242,27 +323,29 @@ const Dashboard = () => {
   const totalRevenue = data.dailyData.reduce((sum, day) => sum + day.revenue, 0);
   const totalVisitors = data.dailyData.reduce((sum, day) => sum + day.visitors, 0);
 
+  const filteredHotels = data.hotels.filter(hotel =>
+    hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    hotel.city.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="p-8 bg-violet-50 font-sans">
       <h1 className="text-3xl mt-16 font-bold mb-6 text-violet-800">TripFinder Admin Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <Card title="Total Bookings" value={totalBookings} icon={UserPlus} />
-        <Card title="Total Revenue" value={`$${totalRevenue.toLocaleString()}`} icon={DollarSign} />
-        <Card title="Total Visitors" value={totalVisitors.toLocaleString()} icon={Luggage} />
-        <Card title="Conversion Rate" value={`${((totalBookings / totalVisitors) * 100).toFixed(2)}%`} icon={TrendingUp} />
         <Card title="Total Users" value={data.totalUsers.toLocaleString()} icon={UserPlus} />
         <Card title="Total Locations" value={data.totalLocations.toLocaleString()} icon={MapPin} />
         <Card title="International Bookings" value={data.internationalBookings.toLocaleString()} icon={Globe} />
+        <Card title="Total Hotels" value={data.totalHotels.toLocaleString()} icon={Building} />
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <div className="flex border-b border-violet-200">
           <TabButton active={activeTab === 'AllUsers'} onClick={() => setActiveTab('AllUsers')}>All Users</TabButton>
-          <TabButton active={activeTab === 'AllLocations'} onClick={() => setActiveTab('AllLocations')}>All locations</TabButton>
+          <TabButton active={activeTab === 'AllLocations'} onClick={() => setActiveTab('AllLocations')}>All Locations</TabButton>
           <TabButton active={activeTab === 'destinations'} onClick={() => setActiveTab('destinations')}>Top Destinations</TabButton>
           <TabButton active={activeTab === 'international'} onClick={() => setActiveTab('international')}>International Bookings</TabButton>
-          <TabButton active={activeTab === 'contact'} onClick={() => setActiveTab('contact')}>Contact</TabButton>
+          <TabButton active={activeTab === 'hotels'} onClick={() => setActiveTab('hotels')}>Hotels</TabButton>
         </div>
 
         <div className="p-6">
@@ -311,31 +394,82 @@ const Dashboard = () => {
               </div>
             </div>
           )}
-          {activeTab === 'international' && (
+         {activeTab === 'international' && (
+        <div>
+          <h2 className="text-xl font-semibold mb-4 text-violet-800">International Bookings</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={[{ name: 'International', value: data.internationalBookings }]}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                fill="#82ca9d"
+              />
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold mb-4 text-violet-800">International Trip Plans</h3>
+            <ul className="list-disc list-inside text-violet-700">
+              {data.trips.map((trip, index) => (
+                <li key={index}>{trip.title}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+          {activeTab === 'contact' && <ContactPage contacts={data.contacts} />}
+          {activeTab === 'hotels' && (
             <div>
-              <h2 className="text-xl font-semibold mb-4 text-violet-800">International Bookings</h2>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={data.destinations.filter(dest => dest.name === 'International')}
-                    dataKey="bookings"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={100}
-                    fill="#8884d8"
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4 text-violet-800">Top 10 Cities with Most Hotels</h2>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={cityData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="city" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="count" fill="#8884d8" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <h2 className="text-xl font-semibold mb-4 text-violet-800">Hotels</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {findCities(filteredHotels, searchTerm).map((hotel, index) => (
+                  <HotelCard key={index} hotel={hotel} />
+                ))}
+              </div>
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4 text-violet-800">Complex Graph</h2>
+                <ResponsiveContainer width="100%" height={400}>
+                  <ComposedChart
+                    data={data.dailyData}
+                    margin={{
+                      top: 20,
+                      right: 20,
+                      bottom: 20,
+                      left: 20,
+                    }}
                   >
-                    {data.destinations.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.name === 'International' ? '#82ca9d' : '#8884d8'} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+                    <CartesianGrid stroke="#f5f5f5" />
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Area type="monotone" dataKey="revenue" fill="#8884d8" stroke="#8884d8" />
+                    <Bar dataKey="bookings" barSize={20} fill="#413ea0" />
+                    <Line type="monotone" dataKey="visitors" stroke="#ff7300" />
+                    <Scatter dataKey="conversionRate" fill="red" />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           )}
-          {activeTab === 'contact' && <ContactPage contacts={data.contacts} />}
         </div>
       </div>
     </div>
