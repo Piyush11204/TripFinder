@@ -1,0 +1,142 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+const Dashboard = () => {
+  const [data, setData] = useState({
+    dailyData: [],
+    destinations: [],
+    totalUsers: 0,
+    totalLocations: 0,
+    internationalBookings: 0,
+  });
+
+  const fetchDashboardData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/dashboard'); // Adjust this URL as needed
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+      return null; // Return null on error
+    }
+  };
+
+  const fetchLocationsData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/addlocation'); // Adjust this URL as needed
+      return response.data || []; // Ensure this returns an array, even if empty
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+      return []; // Return an empty array on error
+    }
+  };
+
+  const fetchUsersData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/users'); // Adjust this URL as needed
+      return response.data || []; // Ensure this returns an array, even if empty
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      return []; // Return an empty array on error
+    }
+  };
+
+  const generateDummyData = (numDays) => {
+    const data = [];
+    for (let i = 0; i < numDays; i++) {
+      data.push({ date: `Day ${i + 1}`, bookings: Math.floor(Math.random() * 100) });
+    }
+    return data;
+  };
+
+  const generateDummyDestinations = () => {
+    return [
+      { name: 'Location A', bookings: Math.floor(Math.random() * 100), revenue: Math.floor(Math.random() * 10000) },
+      { name: 'Location B', bookings: Math.floor(Math.random() * 100), revenue: Math.floor(Math.random() * 10000) },
+      // Add more dummy locations as needed
+    ];
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const dashboardData = await fetchDashboardData();
+      const locationsData = await fetchLocationsData();
+      const usersData = await fetchUsersData();
+
+      const dailyData = dashboardData ? dashboardData.dailyData : generateDummyData(30);
+      const destinations = Array.isArray(locationsData) && locationsData.length > 0 ? locationsData : generateDummyDestinations();
+
+      setData({
+        dailyData,
+        destinations,
+        totalUsers: usersData ? usersData.length : 0,
+        totalLocations: locationsData.length,
+        internationalBookings: Math.floor(Math.random() * 500) // Dummy value for international bookings
+      });
+    };
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 300000); // Refresh data every 5 minutes
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+
+      <h2 className="text-xl font-semibold mb-2">Daily Bookings</h2>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={data.dailyData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="bookings" stroke="#8884d8" activeDot={{ r: 8 }} />
+        </LineChart>
+      </ResponsiveContainer>
+
+      <h2 className="text-xl font-semibold mt-4 mb-2">Top Destinations</h2>
+      <Table data={data.destinations} />
+
+      <div className="mt-4">
+        <p>Total Users: {data.totalUsers}</p>
+        <p>Total Locations: {data.totalLocations}</p>
+        <p>International Bookings: {data.internationalBookings}</p>
+      </div>
+    </div>
+  );
+};
+
+const Table = ({ data }) => (
+  <table className="min-w-full bg-white border border-gray-300 mt-2">
+    <thead>
+      <tr>
+        <th className="px-6 py-3 border-b-2 border-violet-200 text-left text-xs font-semibold text-violet-800 uppercase tracking-wider">
+          Destination
+        </th>
+        <th className="px-6 py-3 border-b-2 border-violet-200 text-left text-xs font-semibold text-violet-800 uppercase tracking-wider">
+          Bookings
+        </th>
+        <th className="px-6 py-3 border-b-2 border-violet-200 text-left text-xs font-semibold text-violet-800 uppercase tracking-wider">
+          Revenue
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {data.map((item, index) => (
+        <tr key={index} className={index % 2 === 0 ? 'bg-violet-50' : 'bg-white'}>
+          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-violet-900">{item.name}</td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm text-violet-800">
+            {item.bookings !== undefined ? item.bookings : 0}
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm text-violet-800">
+            {item.revenue !== undefined ? `$${item.revenue.toLocaleString()}` : '$0'}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
+
+export default Dashboard;
