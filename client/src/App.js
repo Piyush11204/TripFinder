@@ -14,6 +14,8 @@ import ContactUs from "./Pages/ContactUs/Contact";
 import TripModal from "./components/TripModal";
 import TripvanaReviewPage from "./Pages/TripvanaReviewPage/TripvanaReviewPage";
 import Hotels from "./Pages/Hotels/Hotels.jsx";
+import Admin from "./Pages/Admin/Admin.jsx";
+
 
 function App() {
 	const user = localStorage.getItem("token");
@@ -32,7 +34,8 @@ function App() {
 			<Route path="/blog" element={<TripvanaReviewPage />}/>
 			<Route path="/trip/:title" component={TripModal} />
 			<Route path="/Hotels"  element={<Hotels />} />
-
+			<Route path="/Admin" element={<Admin />} />
+			
 
 			
 			{user && <Route path="/" exact element={<Home />} />}
