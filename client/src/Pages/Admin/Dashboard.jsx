@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell,
+  
   ComposedChart,
   Area,
   Line,
@@ -319,9 +319,9 @@ const Dashboard = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const totalBookings = data.dailyData.reduce((sum, day) => sum + day.bookings, 0);
-  const totalRevenue = data.dailyData.reduce((sum, day) => sum + day.revenue, 0);
-  const totalVisitors = data.dailyData.reduce((sum, day) => sum + day.visitors, 0);
+  // const totalBookings = data.dailyData.reduce((sum, day) => sum + day.bookings, 0);
+  // const totalRevenue = data.dailyData.reduce((sum, day) => sum + day.revenue, 0);
+  // const totalVisitors = data.dailyData.reduce((sum, day) => sum + day.visitors, 0);
 
   const filteredHotels = data.hotels.filter(hotel =>
     hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
