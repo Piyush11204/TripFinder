@@ -20,18 +20,19 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        /* Improved Loader styles */
+        /* Loader styles */
         .loader-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
         .loader {
@@ -41,7 +42,7 @@
         .loader h1 {
             font-size: 68px;
             color: #ffffff;
-            font-family: 'Ethnocentric', sans-serif; /* Fallback to sans-serif */
+            font-family: 'Ethnocentric', sans-serif;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
@@ -79,7 +80,7 @@
             top: 16.2px;
             right: 240px;
             z-index: 1000;
-            
+            transition: opacity 0.3s ease;
         }
 
         .goog-te-gadget {
@@ -155,7 +156,7 @@
         </div>
     </div>
 
-    
+    <div id="google_translate_element"></div>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -172,6 +173,39 @@
                     translateElement.innerHTML = 'Translate';
                 }
             }, 300);
+
+            // Add event listener for language changes
+            if (window.googleTranslateElementInit.hasListener) return;
+            window.googleTranslateElementInit.hasListener = true;
+
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('goog-te-menu-value') || 
+                    e.target.closest('.goog-te-menu-value')) {
+                    const observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            if (mutation.target.getAttribute('style')?.includes('background-color')) {
+                                // Language has been changed
+                                setTimeout(function() {
+                                    const translateElement = document.getElementById('google_translate_element');
+                                    if (translateElement) {
+                                        translateElement.style.opacity = '0';
+                                        setTimeout(() => {
+                                            translateElement.style.display = 'none';
+                                        }, 300);
+                                    }
+                                }, 1000); // Wait a second after language change
+                                observer.disconnect();
+                            }
+                        });
+                    });
+
+                    // Start observing the body for style changes
+                    observer.observe(document.body, {
+                        attributes: true,
+                        attributeFilter: ['style']
+                    });
+                }
+            });
         }
 
         window.addEventListener('load', function() {
@@ -180,7 +214,7 @@
                 setTimeout(function() {
                     document.getElementById('loader').style.display = 'none';
                 }, 500);
-            }, 2000); // Show loader for 2 seconds
+            }, 2000);
         });
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
