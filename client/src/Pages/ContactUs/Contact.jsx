@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 
 const ContactUs = () => {
@@ -13,23 +12,27 @@ const ContactUs = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      await axios.post('http://localhost:8080/api/contact', formData); // Replace with your API endpoint
+      // Replace with your API endpoint
+      await fetch('http://localhost:8080/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
       setSuccessMessage('Your message has been sent successfully!');
-      setFormData({ name: '', email: '', subject: '', message: '' }); // Reset form
-      setErrorMessage(''); // Clear any error messages
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setErrorMessage('');
     } catch (error) {
       setErrorMessage('There was an error sending your message. Please try again later.');
-      setSuccessMessage(''); // Clear success messages
+      setSuccessMessage('');
     }
   };
 
@@ -37,7 +40,7 @@ const ContactUs = () => {
     <div className="bg-gradient-to-b from-purple-100 to-white min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[500px] bg-cover bg-center">
-        <video autoPlay muted loop className="absolute inset-0 w-full h-full object-cover">
+      <video autoPlay muted loop className="absolute inset-0 w-full h-full object-cover">
           <source src="https://videos.pexels.com/video-files/3002384/3002384-hd_1920_1080_25fps.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -56,9 +59,9 @@ const ContactUs = () => {
           <h2 className="text-3xl font-semibold mb-8 text-center text-purple-700">Get in Touch</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { icon: <MapPin className="w-6 h-6 text-purple-500" />, title: "Our Office", content: "123 Travel Street, Adventure City, TC 12345" },
-              { icon: <Phone className="w-6 h-6 text-purple-500" />, title: "Phone", content: "+1 (555) 123-4567" },
-              { icon: <Mail className="w-6 h-6 text-purple-500" />, title: "Email", content: "info@tripvana.com" },
+              { icon: <MapPin className="w-6 h-6 text-purple-500" />, title: "Our Office", content: "Boisar Maharashtra" },
+              { icon: <Phone className="w-6 h-6 text-purple-500" />, title: "Phone", content: "+91 7558565929" },
+              { icon: <Mail className="w-6 h-6 text-purple-500" />, title: "Email", content: "info@tripfinder.com" },
               { icon: <Clock className="w-6 h-6 text-purple-500" />, title: "Business Hours", content: "Mon-Fri: 9AM-6PM, Sat: 10AM-4PM" },
             ].map((item, index) => (
               <div key={index} className="flex items-start space-x-4">
@@ -69,6 +72,22 @@ const ContactUs = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-8 text-center text-purple-700">Find Us</h2>
+          <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              title="Office Location"
+              className="w-full h-full border-0"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30129.000749561815!2d72.74769535!3d19.80273865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71b0c023ff42d%3A0xc851e43ad9a7c9ed!2sBoisar%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1697538183360!5m2!1sen!2sin"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>

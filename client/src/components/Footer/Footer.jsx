@@ -38,12 +38,12 @@ const Footer = () => {
                         <Link to="/Home" className="ml-2 flex mx-auto md:ml-4">
                         <img className="w-16 h-16 md:w-20 md:h-20 md:mb-4" src={logoDevtalk} alt="Logo" />
                             <h1 className="text-3xl mt-5 md:text-5xl font-ethnocentric text-white drop-shadow-lg">
-                                Trip<span className="vana">vana</span>
+                                Trip<span className="vana">Finder</span>
                             </h1>
                         </Link>
                     </div>
                     <p className="text-lg font-semibold mt-4">
-                        Welcome to Tripvana! Let us guide you to your dream getaway.
+                        Welcome to TripFinder! Let us guide you to your dream getaway.
                     </p>
                     <div className="mt-6">
                         <span className="block text-xl font-bold mb-2">Follow us</span>
@@ -67,7 +67,7 @@ const Footer = () => {
                     <ul className="space-y-2">
                         <li><Link to="/" className="text-gray-400 hover:text-purple-500">Home</Link></li>
                         <li><Link to="/contact" className="text-gray-400 hover:text-purple-500">Contact</Link></li>
-                        <li><Link to="/about" className="text-gray-400 hover:text-purple-500">About us</Link></li>
+                        <li><Link to="/aboutus" className="text-gray-400 hover:text-purple-500">About us</Link></li>
                         <li><Link to="/team" className="text-gray-400 hover:text-purple-500">Expert Team</Link></li>
                         <li><Link to="/contactus" className="text-gray-400 hover:text-purple-500">Contact us</Link></li>
                         <li><Link to="/log" className="text-gray-400 hover:text-purple-500">Latest News</Link></li>
@@ -98,7 +98,7 @@ const Footer = () => {
 
             <div className="bg-gray-800 text-center py-4 mt-8">
                 <p className="text-gray-400">
-                    © 2024 Tripvana, Inc. All rights reserved.
+                    © 2024 TripFinder, Inc. All rights reserved.
                 </p>
             </div>
         </footer>

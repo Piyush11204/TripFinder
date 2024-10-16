@@ -18,7 +18,7 @@ const AboutUs = () => {
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white z-10">
-            <h1 className="text-5xl font-bold mb-4">About Tripvana</h1>
+            <h1 className="text-5xl font-bold mb-4">About TripFinder</h1>
             <p className="text-xl">Inspiring Adventures, Creating Memories</p>
           </div>
         </div>
@@ -29,7 +29,7 @@ const AboutUs = () => {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-semibold mb-6 text-purple-700">Our Mission</h2>
           <p className="text-lg text-gray-700 leading-relaxed">
-            At Tripvana, we're passionate about transforming your travel dreams into unforgettable realities. Our mission is to inspire, guide, and empower travelers to explore the world's most captivating destinations, creating lifelong memories and fostering cultural understanding along the way.
+            At TripFinder, we're passionate about transforming your travel dreams into unforgettable realities. Our mission is to inspire, guide, and empower travelers to explore the world's most captivating destinations, creating lifelong memories and fostering cultural understanding along the way.
           </p>
         </div>
       </section>
@@ -64,7 +64,7 @@ const AboutUs = () => {
           <h2 className="text-3xl font-semibold mb-6 text-center text-purple-700">Our Story</h2>
           <div className="bg-white p-8 rounded-lg shadow-md">
             <p className="text-gray-700 leading-relaxed mb-4">
-              Tripvana was born from a shared love of travel and a desire to make exceptional journeys accessible to everyone. Founded in 2020 by a group of passionate globetrotters, we've grown from a small startup to a trusted name in the travel industry.
+              TripFinder was born from a shared love of travel and a desire to make exceptional journeys accessible to everyone. Founded in 2020 by a group of passionate globetrotters, we've grown from a small startup to a trusted name in the travel industry.
             </p>
             <p className="text-gray-700 leading-relaxed">
               Our team of experienced travel enthusiasts works tirelessly to curate unique experiences, from serene beach getaways to thrilling mountain adventures. We believe that every trip has the potential to be life-changing, and we're here to make that potential a reality for our customers.
@@ -76,7 +76,7 @@ const AboutUs = () => {
       {/* Why Choose Us */}
       <section className="bg-purple-50 py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-semibold mb-12 text-center text-purple-700">Why Choose Tripvana?</h2>
+          <h2 className="text-3xl font-semibold mb-12 text-center text-purple-700">Why Choose TripFinder?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: <Globe className="w-12 h-12 text-purple-500" />, title: "Global Expertise", description: "Our team has first-hand knowledge of destinations worldwide.", link: "#global-expertise" },
@@ -101,7 +101,7 @@ const AboutUs = () => {
       <section className="bg-purple-700 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-semibold mb-6">Ready to Start Your Adventure?</h2>
-          <p className="text-xl mb-8">Join us at Tripvana and discover the world in a whole new way.</p>
+          <p className="text-xl mb-8">Join us at TripFinder and discover the world in a whole new way.</p>
           <Link to="/Home">
           <button className="bg-white text-purple-700 font-semibold py-3 px-8 rounded-full hover:bg-purple-100 transition duration-300">
             Plan Your Trip Now

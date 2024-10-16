@@ -25,7 +25,7 @@ function App() {
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/home" element={<Home />} />
             <Route path="/addlocation" element={<Addlocation />} />
-            <Route path="/about" element={<AboutUS />} />
+            <Route path="/aboutus" element={<AboutUS />} />
             <Route path="/location/:id" element={<LocationPage />} />
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/contact" element={<ContactUs />} />

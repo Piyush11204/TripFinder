@@ -101,12 +101,12 @@ const Navbar = () => {
                     />
                     <Link to="/Home">
                         <h1 className="text-white font-[ethnocentric] text-xl sm:text-2xl font-bold ml-2 sm:ml-4">
-                            Trip<span className="vana font-[ethnocentric] text-purple-400">vana</span>
+                            Trip<span className="vana font-[ethnocentric] text-purple-400">Finder</span>
                         </h1>
                     </Link>
                 </div>
 
-                <div className="hidden md:flex items-center gap-6">
+                <div className="hidden md:flex items-center gap-1">
                     <NavLink to="/Hotels">Hotels</NavLink>
                     <NavLink to="/addLocation">Add Location</NavLink>
                     <NavLink to="/aboutus">About Us</NavLink>
@@ -124,7 +124,7 @@ const Navbar = () => {
                             className="py-1 border-b-2 border-gray-500 focus:border-purple-400 outline-none bg-transparent text-white placeholder-gray-400 w-48 lg:w-72"
                         />
                         <button
-                            className="px-3 mr-2 py-1 text-sm text-white border-2 border-purple-500 rounded-full hover:bg-purple-500 hover:text-gray-900 transition-all duration-300"
+                            className="px-3 mr-14 py-1 text-sm text-white border-2 border-purple-500 rounded-full hover:bg-purple-500 hover:text-gray-900 transition-all duration-300"
                             onClick={handleSearch}
                         >
                             Search

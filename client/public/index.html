@@ -124,6 +124,143 @@
             display: none !important;
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: rgba(139, 92, 246, 0.9);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: rgba(124, 58, 237, 0.9);
+            transform: translateY(-3px);
+        }
+
+        /* Chatbot Container */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+            display: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-window.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+            padding: 16px;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-close {
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            opacity: 1;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .chatbot-input-container {
+            padding: 16px;
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
+            display: flex;
+            gap: 8px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chatbot-input:focus {
+            border-color: #8B5CF6;
+        }
+
+        .chatbot-send {
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .chatbot-send:hover {
+            background: #7C3AED;
+        }
+
         @media (max-width: 768px) {
             .loader h1 {
                 font-size: 36px;
@@ -145,6 +282,12 @@
             .goog-te-menu-value {
                 font-size: 12px;
             }
+
+            .chatbot-window {
+                width: calc(100vw - 40px);
+                height: 60vh;
+                bottom: 90px;
+            }
         }
     </style>
 </head>
@@ -157,6 +300,31 @@
     </div>
 
     <div id="google_translate_element"></div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop" title="Back to Top">
+        ↑
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-button" id="chatbotButton">
+            💬
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <span>Tripvana Assistant</span>
+                <span class="chatbot-close" id="chatbotClose">✕</span>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
+                <button class="chatbot-send" id="chatbotSend">Send</button>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -215,6 +383,83 @@
                     document.getElementById('loader').style.display = 'none';
                 }, 500);
             }, 2000);
+
+            // Back to Top functionality
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Chatbot functionality
+            const chatbotButton = document.getElementById('chatbotButton');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotClose = document.getElementById('chatbotClose');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotSend = document.getElementById('chatbotSend');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+
+            chatbotButton.addEventListener('click', function() {
+                chatbotWindow.classList.add('active');
+            });
+
+            chatbotClose.addEventListener('click', function() {
+                chatbotWindow.classList.remove('active');
+            });
+
+            function addMessage(message, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.style.marginBottom = '10px';
+                messageDiv.style.padding = '8px 12px';
+                messageDiv.style.borderRadius = '8px';
+                messageDiv.style.maxWidth = '80%';
+                messageDiv.style.wordWrap = 'break-word';
+                
+                if (isUser) {
+                    messageDiv.style.marginLeft = 'auto';
+                    messageDiv.style.backgroundColor = '#8B5CF6';
+                    messageDiv.style.color = 'white';
+                } else {
+                    messageDiv.style.backgroundColor = '#F3F4F6';
+                    messageDiv.style.color = 'black';
+                }
+                
+                messageDiv.textContent = message;
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            function handleSend() {
+                const message = chatbotInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+                    chatbotInput.value = '';
+                    
+                    // Here you can integrate your chatbot API
+                    // For now, we'll just echo back a response
+                    setTimeout(() => {
+                        addMessage('Thanks for your message! Our team will get back to you soon.');
+                    }, 1000);
+                }
+            }
+
+            chatbotSend.addEventListener('click', handleSend);
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSend();
+                }
+            });
         });
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
