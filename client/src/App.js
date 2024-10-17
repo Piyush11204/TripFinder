@@ -24,14 +24,26 @@ function App() {
         <Routes>
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/addlocation" element={<Addlocation />} />
             <Route path="/aboutus" element={<AboutUS />} />
             <Route path="/location/:id" element={<LocationPage />} />
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/blog" element={<TripvanaReviewPage />} />
             <Route path="/trip/:title" element={<TripModal />} />
-            <Route path="/hotels" element={<Hotels />} />
+
+            {/* Restricted routes for logged-in users only */}
+            {user ? (
+                <>
+                    <Route path="/addlocation" element={<Addlocation />} />
+                    <Route path="/hotels" element={<Hotels />} />
+                </>
+            ) : (
+                <>
+                    <Route path="/addlocation" element={<Navigate to="/login" replace />} />
+                    <Route path="/hotels" element={<Navigate to="/login" replace />} />
+                </>
+            )}
+
             <Route path="/admin" element={<Admin />} />
             <Route path="/dashboard" element={<Dashboard />} />
 

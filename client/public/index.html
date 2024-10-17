@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Tripvana - Your Travel Companion" />
+    <meta name="description" content="TripFinder - Your Travel Companion" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Tripvana</title>
+    <title>TripFinder</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Ethnocentric&display=swap');
@@ -18,6 +19,13 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .goog-logo-link,
+        .goog-te-banner-frame,
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd,
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+            display: none !important;
         }
 
         /* Loader styles */
@@ -44,13 +52,13 @@
             color: #ffffff;
             font-family: 'Ethnocentric', sans-serif;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .loader-bar {
             width: 200px;
             height: 4px;
-            background-color: rgba(255,255,255,0.2);
+            background-color: rgba(255, 255, 255, 0.2);
             margin: 0 auto;
             position: relative;
             overflow: hidden;
@@ -70,8 +78,13 @@
         }
 
         @keyframes loading {
-            0% { left: -40%; }
-            100% { left: 100%; }
+            0% {
+                left: -40%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         /* Google Translate styles */
@@ -116,13 +129,15 @@
         }
 
         /* Hide Google branding */
-        .goog-logo-link, .goog-te-gadget span {
+        .goog-logo-link,
+        .goog-te-gadget span {
             display: none !important;
         }
 
         .goog-te-banner-frame {
             display: none !important;
         }
+
         .chatbot-popup {
             position: fixed;
             bottom: 20px;
@@ -132,11 +147,13 @@
             border: none;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            display: none; /* Initially hidden */
+            display: none;
+            /* Initially hidden */
             z-index: 9999;
-            transition: transform 0.3s ease-in-out; /* Animation */
+            transition: transform 0.3s ease-in-out;
+            /* Animation */
         }
-    
+
         .chatbot-toggle {
             position: fixed;
             bottom: 20px;
@@ -149,22 +166,29 @@
             height: 60px;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
             cursor: pointer;
-            z-index: 10000; /* Above the iframe */
-            transition: background 0.3s, transform 0.3s; /* Animation */
-            display: flex; /* Center the icon */
-            align-items: center; /* Center the icon vertically */
-            justify-content: center; /* Center the icon horizontally */
+            z-index: 10000;
+            /* Above the iframe */
+            transition: background 0.3s, transform 0.3s;
+            /* Animation */
+            display: flex;
+            /* Center the icon */
+            align-items: center;
+            /* Center the icon vertically */
+            justify-content: center;
+            /* Center the icon horizontally */
         }
-    
+
         .chatbot-toggle:hover {
             background: linear-gradient(135deg, #c63aed, #7c3aed);
-            transform: scale(1.1); /* Slightly enlarge the button */
+            transform: scale(1.1);
+            /* Slightly enlarge the button */
         }
-    
+
         .chatbot-toggle:active {
-            transform: scale(0.9); /* Shrink when clicked */
+            transform: scale(0.9);
+            /* Shrink when clicked */
         }
-    
+
         /* Back to Top Button */
         .back-to-top {
             position: fixed;
@@ -220,10 +244,11 @@
         }
     </style>
 </head>
+
 <body>
     <div class="loader-container" id="loader">
         <div class="loader">
-            <h1>Tripvana</h1>
+            <h1>TripFinder</h1>
             <div class="loader-bar"></div>
         </div>
     </div>
@@ -244,7 +269,7 @@
             }, 'google_translate_element');
 
             // Customize the translate button text
-            setTimeout(function() {
+            setTimeout(function () {
                 var translateElement = document.querySelector('.goog-te-menu-value span:first-child');
                 if (translateElement) {
                     translateElement.innerHTML = 'Translate';
@@ -255,14 +280,14 @@
             if (window.googleTranslateElementInit.hasListener) return;
             window.googleTranslateElementInit.hasListener = true;
 
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('goog-te-menu-value') || 
+            document.addEventListener('click', function (e) {
+                if (e.target.classList.contains('goog-te-menu-value') ||
                     e.target.closest('.goog-te-menu-value')) {
-                    const observer = new MutationObserver(function(mutations) {
-                        mutations.forEach(function(mutation) {
+                    const observer = new MutationObserver(function (mutations) {
+                        mutations.forEach(function (mutation) {
                             if (mutation.target.getAttribute('style')?.includes('background-color')) {
                                 // Language has been changed
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     const translateElement = document.getElementById('google_translate_element');
                                     if (translateElement) {
                                         translateElement.style.opacity = '0';
@@ -285,18 +310,18 @@
             });
         }
 
-        window.addEventListener('load', function() {
-            setTimeout(function() {
+        window.addEventListener('load', function () {
+            setTimeout(function () {
                 document.getElementById('loader').style.opacity = '0';
-                setTimeout(function() {
+                setTimeout(function () {
                     document.getElementById('loader').style.display = 'none';
                 }, 500);
             }, 2000);
 
             // Back to Top functionality
             const backToTop = document.getElementById('backToTop');
-            
-            window.addEventListener('scroll', function() {
+
+            window.addEventListener('scroll', function () {
                 if (window.pageYOffset > 300) {
                     backToTop.classList.add('visible');
                 } else {
@@ -304,7 +329,7 @@
                 }
             });
 
-            backToTop.addEventListener('click', function() {
+            backToTop.addEventListener('click', function () {
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
@@ -312,34 +337,34 @@
             });
         });
 
-        
+
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <iframe 
-    id="chatbot" 
-    class="chatbot-popup" 
-    src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/10/16/20/20241016202357-AFB6RY0J.json">
-</iframe>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <iframe id="chatbot" class="chatbot-popup"
+        src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/10/16/20/20241016202357-AFB6RY0J.json">
+    </iframe>
 
-<button class="chatbot-toggle" onclick="toggleChatbot()">
-    <span style="font-size: 24px;">💬</span>
-</button>
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <span style="font-size: 24px;">💬</span>
+    </button>
 
-<script>
-    function toggleChatbot() {
-        const chatbot = document.getElementById('chatbot');
-        if (chatbot.style.display === 'none' || chatbot.style.display === '') {
-            chatbot.style.display = 'block';
-            chatbot.style.transform = 'translateY(0)'; // Slide in effect
-        } else {
-            chatbot.style.transform = 'translateY(100%)'; // Slide out effect
-            setTimeout(() => { chatbot.style.display = 'none'; }, 300); // Delay hiding the iframe
+    <script>
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            if (chatbot.style.display === 'none' || chatbot.style.display === '') {
+                chatbot.style.display = 'block';
+                chatbot.style.transform = 'translateY(0)'; // Slide in effect
+            } else {
+                chatbot.style.transform = 'translateY(100%)'; // Slide out effect
+                setTimeout(() => { chatbot.style.display = 'none'; }, 300); // Delay hiding the iframe
+            }
         }
-    }
-</script>
+    </script>
 
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 </body>
+
 </html>
