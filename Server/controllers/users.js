@@ -13,7 +13,7 @@ async function handleAllUsers(req, res) {
 }
 async function handleUpdateProfile(req, res) {
     try {
-        // Validate request data (make password optional in validation)
+        
         const { error } = validate(req.body);
         if (error) return res.status(400).send({ message: error.details[0].message });
 

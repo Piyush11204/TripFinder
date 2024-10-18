@@ -29,7 +29,7 @@ app.use('/api/addlocation', locationRoutes);
 app.use('/api/users/me', profileRoutes);
 app.use('/api', searchRoutes);
 app.use('/api', ContactRoutes);
-app.use('/api/v1/send-email', emailRouter);
+app.use('/api/v1/', emailRouter);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

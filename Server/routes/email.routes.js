@@ -16,7 +16,7 @@ let transporter = nodemailer.createTransport({
 });
 
 // Define the route for sending emails
-router.post('/', (req, res) => {
+router.post('/send-email', (req, res) => {
     const { name, email, phone, trip } = req.body;
 
     // Logging for troubleshooting
