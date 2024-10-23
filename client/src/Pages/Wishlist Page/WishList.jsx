@@ -9,11 +9,7 @@ const WishList = () => {
         const fetchLocations = async () => {
             try {
                 // List of location IDs to be fetched from the backend
-                const locationIds = [
-                    '66f6a153027c2896ea1b1503',
-                    '66bb6137eb8658e2de3b80a6',
-                    '66c4d3cd8587f0bfe3ea7a6'
-                ];
+                const locationIds = [];
                 
                 // Fetch locations for each ID
                 const fetchedLocations = await Promise.all(
