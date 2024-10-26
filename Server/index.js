@@ -10,6 +10,7 @@ const profileRoutes = require('./routes/profile');
 const searchRoutes = require('./routes/search');
 const ContactRoutes = require('./routes/contact.routes');   // Corrected this
 const emailRouter = require('./routes/email.routes.js');
+const ReviewRouter = require("./routes/review.router.js")
 
 const app = express();
 app.use(express.static('static'));
@@ -30,6 +31,7 @@ app.use('/api/users/me', profileRoutes);
 app.use('/api', searchRoutes);
 app.use('/api', ContactRoutes);
 app.use('/api/v1/', emailRouter);
+app.use('/api', ReviewRouter);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, X, MapPin, Calendar, Activity, Info } from 'lucide-react';
-import Carousel1 from '../../img/Carousel1.jpg';
-import Carousel2 from '../../img/Carousel2.jpg';
-import Carousel3 from '../../img/Carousel3.jpg';
-import Carousel4 from '../../img/Carousel4.jpg';
-import Carousel5 from '../../img/Carousel5.jpg';
+// import Carousel1 from '../../img/Carousel1.jpg';
+// import Carousel2 from '../../img/Carousel2.jpg';
+// import Carousel3 from '../../img/Carousel3.jpg';
+// import Carousel4 from '../../img/Carousel4.jpg';
+// import Carousel5 from '../../img/Carousel5.jpg';
 
 const carouselData = [
   { 
-    image: Carousel1, 
+    image: "https://res.cloudinary.com/dl16vvgyy/image/upload/v1729950974/cmztfluqq9brt3y48v8v.jpg", 
     text: "Explore breathtaking landscapes", 
     subheadline: "Majestic views", 
     description: "Discover breathtaking views that will leave you in awe. From towering mountains to serene beaches, our landscapes offer a perfect escape from the everyday hustle.",
@@ -18,7 +18,7 @@ const carouselData = [
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2818.530430565568!2d8.232220075872092!3d46.56673397123631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478f9e1e69a8a55f%3A0x3b2c10d21fc9ae0!2sSwiss%20Alps!5e0!3m2!1sen!2sus!4v1633532611654!5m2!1sen!2sus"
   },
   { 
-    image: Carousel2, 
+    image: "https://res.cloudinary.com/dl16vvgyy/image/upload/v1729950974/jnad6s7h1trkxjds47ji.jpg", 
     text: "Discover hidden gems", 
     subheadline: "Off the beaten path", 
     description: "Find places known only to the locals. Our curated selection of hidden gems will take you on a journey of discovery, revealing the true essence of each destination.",
@@ -28,7 +28,7 @@ const carouselData = [
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2880.5453842266463!2d9.709973375820866!3d44.12677197910649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d4e4febc41ba67%3A0x4e3c1e077a09e15c!2sCinque%20Terre!5e0!3m2!1sen!2sus!4v1633532711654!5m2!1sen!2sus"
   },
   { 
-    image: Carousel3, 
+    image: "https://res.cloudinary.com/dl16vvgyy/image/upload/v1729950974/kj97adrark0k4fnm8qhb.jpg", 
     text: "Experience local cultures", 
     subheadline: "Immersive experiences", 
     description: "Dive into the unique customs and traditions of diverse cultures. Our immersive experiences allow you to connect with locals and gain authentic insights into their way of life.",
@@ -38,7 +38,7 @@ const carouselData = [
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.2276723676017!2d135.76803987566228!3d35.01163897258347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001061388bfef85%3A0x2af1b9e8f1a04c3!2sKyoto%2C%20Japan!5e0!3m2!1sen!2sus!4v1633532811654!5m2!1sen!2sus"
   },
   { 
-    "image": Carousel4, 
+    "image": "https://res.cloudinary.com/dl16vvgyy/image/upload/v1729950974/h5n51ri0139fm6ioq2dc.jpg", 
     "text": "Unwind in tropical paradise", 
     "subheadline": "Serene beaches", 
     "description": "Escape to the tranquil shores of pristine beaches, where the soft white sands meet crystal clear waters. Whether you're looking to relax or explore, these tropical havens offer the perfect getaway.",
@@ -48,7 +48,7 @@ const carouselData = [
     "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2614335.951282085!2d72.38267073740865!3d3.202778012942881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x249fbaa33edbba05%3A0xf0f7b1fa9186018!2sMaldives!5e0!3m2!1sen!2sus!4v1633532811654!5m2!1sen!2sus"
 },
 { 
-    "image": Carousel5, 
+    "image": "https://res.cloudinary.com/dl16vvgyy/image/upload/v1729950974/kgyfbn3f9cfpcnpopesp.jpg", 
     "text": "Journey through ancient history", 
     "subheadline": "Historic wonders", 
     "description": "Step back in time and explore the grandeur of ancient civilizations. From awe-inspiring monuments to fascinating ruins, embark on a journey to uncover the secrets of the past.",

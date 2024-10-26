@@ -111,12 +111,12 @@ const TripModal = ({ isOpen, onClose, trip }) => {
                 {Object.entries(trip.expenses).map(([category, amount], index) => (
                   <li key={index} className="flex justify-between items-center">
                     <span className="capitalize text-gray-700">{category}</span>
-                    <span className="font-semibold text-purple-700">${amount}</span>
+                    <span className="font-semibold text-purple-700">₹{amount}0</span>
                   </li>
                 ))}
                 <li className="flex justify-between items-center pt-2 border-t border-purple-200">
                   <span className="font-semibold text-gray-700">Total</span>
-                  <span className="font-bold text-purple-700">${totalExpenses}</span>
+                  <span className="font-bold text-purple-700">₹{totalExpenses}0/-</span>
                 </li>
               </ul>
             </div>
@@ -183,7 +183,7 @@ const TripModal = ({ isOpen, onClose, trip }) => {
                 />
               </div>
               <div>
-                <p className="text-lg font-semibold">Total Amount: ${totalExpenses}</p>
+                <p className="text-lg font-semibold">Total Amount: ₹{totalExpenses}0/-</p>
               </div>
               {bookingStatus === 'success' && (
                 <p className="text-green-600 font-semibold">
