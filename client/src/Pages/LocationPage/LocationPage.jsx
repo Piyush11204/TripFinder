@@ -132,14 +132,14 @@ const LocationPage = () => {
             </div>
           </section>
         </div>
-        <div className="flex justify-center gap-4 mt-8">
+        {/* <div className="flex justify-center gap-4 mt-8">
           <button className="bg-gray-800 text-white rounded-md px-6 py-2 hover:bg-gray-700" onClick={handleBackClick}>
             Back
           </button>
           <button className="bg-orange-500 text-white rounded-md px-6 py-2 hover:bg-orange-400" onClick={handleAddToWishList}>
             Add to Wish List
           </button>
-        </div>
+        </div> */}
         <hr className='border-2' />
 
         {/* Recommendations Carousel */}

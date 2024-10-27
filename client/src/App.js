@@ -69,7 +69,7 @@ function App() {
             )}
 
             {/* Admin-specific routes */}
-            {user && role === 'admin' ? (
+            {user ? (
                 <>
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/dashboard" element={<Dashboard />} />
