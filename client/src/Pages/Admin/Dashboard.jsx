@@ -324,6 +324,7 @@ const Dashboard = () => {
     totalUsers: 0,
     totalLocations: 0,
     internationalBookings: 0,
+    AllReviews:0,
     contacts: [],
     users: [],
     locations: [],
@@ -386,7 +387,8 @@ const Dashboard = () => {
       if (reviewsData) {
         setData(prevData => ({
           ...prevData,
-          reviews: reviewsData
+          reviews: reviewsData,
+          AllReviews:reviewsData.length
         }));
       }
       if (hotelsData) {
@@ -438,7 +440,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <Card title="Total Users" value={data.totalUsers.toLocaleString()} icon={UserPlus} />
         <Card title="Total Locations" value={data.totalLocations.toLocaleString()} icon={MapPin} />
-        <Card title="International Bookings" value={data.internationalBookings.toLocaleString()} icon={Globe} />
+        <Card title="All Reviews" value={data.AllReviews.toLocaleString()} icon={Globe} />
         <Card title="Total Hotels" value={data.totalHotels.toLocaleString()} icon={Building} />
       </div>
 
