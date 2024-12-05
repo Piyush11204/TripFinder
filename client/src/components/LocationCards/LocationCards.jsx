@@ -5,6 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Star, MapPin, ChevronRight } from 'lucide-react';
 
+
 const LocationCard = ({ location }) => {
   const [isHovered, setIsHovered] = useState(false);
 
