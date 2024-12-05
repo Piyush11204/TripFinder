@@ -57,7 +57,7 @@ const LocationPage = () => {
   useEffect(() => {
     const fetchSameTypeLocations = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/addlocation');
+        const response = await axios.get('https://tripfinder.onrender.com/api/addlocation');
         const locations = response.data;
 
         const filteredLocations = locations.filter(

@@ -54,7 +54,9 @@ function App() {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/blog" element={<TripvanaReviewPage />} />
             <Route path="/trip/:title" element={<TripModal />} />
-
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Navigate replace to="/home" />} />
             {/* Restricted routes for logged-in users only */}
             {user ? (
                 <>
@@ -68,24 +70,16 @@ function App() {
                 </>
             )}
 
-            {/* Admin-specific routes */}
-            {user ? (
-                <>
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/" element={<Navigate replace to="/dashboard" />} />
-                </>
-            ) : user ? (
-                <Route path="/" element={<Navigate replace to="/home" />} />
-            ) : (
-                <Route path="/" element={<Navigate replace to="/login" />} />
-            )}
+           
+
+                    
+          
+
+          
 
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="*" element={<NotFoundPage />} />
-
-            {/* Chat Section */}
             <Route path="/chat" element={<ChatApp userName={userName} />} />
         </Routes>
     );
