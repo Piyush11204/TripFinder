@@ -14,9 +14,6 @@ const LocationPage = () => {
   const [rating, setRating] = useState(0); // State for user rating
   const [review, setReview] = useState(''); // State for user review
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
 
   const handleAddToWishList = () => {
     const locationId = locationData._id;
@@ -36,13 +33,6 @@ const LocationPage = () => {
     }
   };
 
-  const handleResize = () => {
-    if (window.innerWidth < 768) {
-      setMapHeight('300px');
-    } else {
-      setMapHeight('450px');
-    }
-  };
 
   const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 

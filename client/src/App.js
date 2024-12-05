@@ -20,7 +20,6 @@ import ChatApp from "./Pages/ChatSection/ChatApp";
 
 function App() {
     const [user, setUser] = useState(localStorage.getItem("token"));
-    const [role, setRole] = useState(localStorage.getItem("role"));
     const [userName, setUserName] = useState('');
 
     useEffect(() => {
@@ -37,6 +36,7 @@ function App() {
 
     const handleLogout = () => {
         setUser(null);
+        // eslint-disable-next-line no-undef
         setRole(null);
         setUserName('');
         localStorage.removeItem("token");
