@@ -37,7 +37,7 @@ const Navbar = () => {
     const fetchSearchResults = async (query) => {
         try {
             const response = await axios.get(
-                `http://localhost:8080/api/search?query=${encodeURIComponent(query)}`
+                `https://tripfinder.onrender.com/api/search?query=${encodeURIComponent(query)}`
             );
             setSearchResults(response.data);
         } catch (error) {
@@ -49,7 +49,7 @@ const Navbar = () => {
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/users/me", {
+                const response = await axios.get("https://tripfinder.onrender.com/api/users/me", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },

@@ -56,7 +56,7 @@ const ChatApp = () => {
 
   useEffect(() => {
     if (userName) {
-      socket.current = io('http://localhost:8080');
+      socket.current = io('http://localhost:8080' || 'https://tripfinder-chat-app.herokuapp.com');
       socket.current.emit('join room', currentRoom);
 
       socket.current.on('chat message', (msg) => {

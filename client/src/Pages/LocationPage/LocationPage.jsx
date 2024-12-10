@@ -40,7 +40,7 @@ const LocationPage = () => {
     if (image.startsWith('http')) {
       return image;
     } else {
-      return `http://localhost:8080/${image}`;
+      return `https://tripfinder.onrender.com/${image}`;
     }
   };
 
