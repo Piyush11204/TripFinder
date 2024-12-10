@@ -145,7 +145,7 @@ const Carousel = () => {
               <span className="text-gray-700">Popular activities: {carouselData[currentIndex].activities.join(', ')}</span>
             </div>
 
-            <iframe src={carouselData[currentIndex].mapUrl} width="100%" height="300" style={{ border: 0 }} allowFullScreen="" loading="lazy" />
+            <iframe src={carouselData[currentIndex].mapUrl} title={carouselData[currentIndex].location} width="100%" height="300" style={{ border: 0 }} allowFullScreen="" loading="lazy" />
           </div>
         </div>
       )}

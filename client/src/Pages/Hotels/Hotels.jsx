@@ -185,6 +185,7 @@ const Hotels = () => {
               </a>
             </div>
             <iframe
+              title={`Map of ${selectedHotel.name}`}
               src={`https://www.google.com/maps/embed/v1/place?key=${API}&q=${encodeURIComponent(selectedHotel.name + ' ' + selectedHotel.city + ' ' + selectedHotel.country)}`}
               width="100%"
               height="300"

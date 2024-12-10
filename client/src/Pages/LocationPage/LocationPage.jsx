@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -7,31 +7,14 @@ import { Star, MapPin } from 'lucide-react'; // Import Lucide icons
 
 const LocationPage = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const locationData = location.state?.location || {};
   const [sameTypeLocations, setSameTypeLocations] = useState([]);
-  const [mapHeight, setMapHeight] = useState('450px');
+  const [mapHeight] = useState('450px');
   const [rating, setRating] = useState(0); // State for user rating
   const [review, setReview] = useState(''); // State for user review
 
 
-  const handleAddToWishList = () => {
-    const locationId = locationData._id;
-    if (!locationId) {
-      alert('Location ID is missing.');
-      return;
-    }
-
-    let wishList = JSON.parse(localStorage.getItem('wishList')) || [];
-
-    if (wishList.includes(locationId)) {
-      alert('This item is already in your Wish List!');
-    } else {
-      wishList.push(locationId);
-      localStorage.setItem('wishList', JSON.stringify(wishList));
-      alert('Added to Wish List!');
-    }
-  };
 
 
   const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
