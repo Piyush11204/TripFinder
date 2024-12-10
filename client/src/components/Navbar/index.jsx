@@ -236,7 +236,7 @@ const Navbar = () => {
                                 <Link to="/Blog" className="block hover:text-purple-300">Blogs</Link>
                             </div>
                         )}
-                        <Link to="/community" className="hover:text-purple-300 transition-colors duration-300">Community</Link>
+                        <Link to="/chat" className="hover:text-purple-300 transition-colors duration-300">Community</Link>
                         {currentUser ? (
                             <button
                                 className="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-600 transition duration-300"

@@ -47,7 +47,7 @@ const AddLocation = () => {
         });
 
         try {
-            const response = await axios.post('http://localhost:8080/api/addlocation', data, {
+            const response = await axios.post('https://tripfinder.onrender.com/api/addlocation', data, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             console.log('Location added successfully:', response.data);

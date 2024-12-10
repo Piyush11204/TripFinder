@@ -17,7 +17,7 @@ const LocationCard = ({ location }) => {
     >
       <div className="relative h-48 overflow-hidden">
         <img 
-          src={location.image.startsWith('http') ? location.image : `http://localhost:8080/${location.image || location.image.url}`}
+          src={location.image.startsWith('http') ? location.image : `https://tripfinder.onrender.com/${location.image || location.image.url}`}
           alt={location.name} 
           className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
         />
@@ -63,7 +63,7 @@ const LocationCards = () => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/addlocation');
+        const response = await axios.get('https://tripfinder.onrender.com/api/addlocation');
         const locations = response.data;
 
         const grouped = locations.reduce((acc, location) => {

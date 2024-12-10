@@ -20,7 +20,7 @@ const EditProfile = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/users/me', {
+            const response = await axios.get('https://tripfinder.onrender.com/api/users/me', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -57,7 +57,7 @@ const EditProfile = () => {
         }
 
         try {
-            const response = await axios.put('http://localhost:8080/api/users/me', userData, {
+            const response = await axios.put('https://tripfinder.onrender.com/api/users/me', userData, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'

@@ -20,7 +20,7 @@ const ContactUs = () => {
     e.preventDefault();
     try {
       // Replace with your API endpoint
-      await fetch('http://localhost:8080/api/contact', {
+      await fetch('https://tripfinder.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

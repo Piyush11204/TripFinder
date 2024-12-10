@@ -49,7 +49,7 @@ const TripvanaReviewPage = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/allreview'); // Adjust the URL according to your API
+        const response = await axios.get('https://tripfinder.onrender.com/api/allreview'); // Adjust the URL according to your API
         setReviews(response.data);
       } catch (error) {
         console.error('Error fetching reviews:', error);
@@ -63,7 +63,7 @@ const TripvanaReviewPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/review', newReview); // Adjust the URL according to your API
+      const response = await axios.post('https://tripfinder.onrender.com/api/review', newReview); // Adjust the URL according to your API
       setReviews([...reviews, response.data]); // Update state with new review
       console.log("review Submited" ,response)
       setNewReview({ name: '', review: '', rating: 5 }); // Reset form
