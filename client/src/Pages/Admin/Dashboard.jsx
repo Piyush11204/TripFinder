@@ -22,7 +22,7 @@ import axios from 'axios';
 // Fetch functions
 const fetchDashboardData = async () => {
   try {
-    const response = await fetch('http://localhost:8080/api/dashboard-data');
+    const response = await fetch('https://tripfinder.onrender.com/api/dashboard-data');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -59,7 +59,7 @@ const fetchInternationalTrips = async () => {
 
 const fetchLocationsData = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/api/addlocation');
+    const response = await axios.get('https://tripfinder.onrender.com/api/addlocation');
     return response.data;
   } catch (error) {
     console.error('Error fetching locations:', error);
@@ -69,7 +69,7 @@ const fetchLocationsData = async () => {
 
 const fetchUsersData = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/api/users');
+    const response = await axios.get('https://tripfinder.onrender.com/api/users');
     return response.data;
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -142,7 +142,7 @@ const ContactPage = ({ contacts }) => (
 );
 const fetchReviewsData = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/api/Allreview');
+    const response = await axios.get('https://tripfinder.onrender.com/api/Allreview');
     return response.data;
   } catch (error) {
     console.error('Error fetching reviews:', error);

@@ -157,7 +157,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             display: none;
             /* Initially hidden */
-            z-index: 9999;
+            z-index:9999;
             transition: transform 0.3s ease-in-out;
             /* Animation */
         }
@@ -174,7 +174,7 @@
             height: 60px;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
             cursor: pointer;
-            z-index: 10000;
+            z-index: 95999;
             /* Above the iframe */
             transition: background 0.3s, transform 0.3s;
             /* Animation */
@@ -352,7 +352,7 @@
     <iframe id="chatbot" class="chatbot-popup"
         src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/10/16/20/20241016202357-AFB6RY0J.json">
     </iframe>
-
+   
     <button class="chatbot-toggle" onclick="toggleChatbot()">
         <span style="font-size: 24px;">💬</span>
     </button>
