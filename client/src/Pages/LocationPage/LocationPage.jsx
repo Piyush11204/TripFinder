@@ -53,11 +53,11 @@ const LocationPage = () => {
 
   return (
     <div className="bg-purple-100 min-h-screen py-4">
-      <div className="bg-white max-w-7xl mx-auto rounded-lg shadow-lg p-4">
-        <h1 className="text-2xl font-bold text-purple-700 border-b border-gray-200 pb-2 mb-4">
+      <div className="bg-white max-w-7xl mx-auto rounded-lg shadow-lg mt-20 p-4">
+        <h1 className="text-3xl font-bold text-center text-purple-700 my-7">
           {locationData.name}
         </h1>
-        
+        <hr className='mb-5 border-2 border-purple-600' />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-3">
             <img
