@@ -21,7 +21,7 @@ router.get('/search', async (req, res) => {
 
         const formattedResults = results.map(result => {
             if (result.image && !result.image.startsWith('http')) {
-                result.image = `http://localhost:8080/${result.image}`;
+                result.image = `https://tripfinder.onrender.com/${result.image}`;
             }
             return result;
         });
