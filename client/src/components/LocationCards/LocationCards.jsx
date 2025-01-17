@@ -5,7 +5,6 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Star, MapPin, ChevronRight } from 'lucide-react';
 
-
 const LocationCard = ({ location }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -26,7 +25,7 @@ const LocationCard = ({ location }) => {
         </div>
       </div>
       <div className="p-4">
-      <h2 className="text-xl font-semibold mb-2 text-gray-800 truncate">{location.name}</h2>
+        <h2 className="text-xl font-semibold mb-2 text-gray-800 truncate">{location.name}</h2>
         <div className="flex items-center mb-2">
           <MapPin size={16} className="text-gray-500 mr-1" />
           <p className="text-sm text-gray-600">{location.station}</p>
@@ -59,6 +58,7 @@ const LocationCard = ({ location }) => {
 
 const LocationCards = () => {
   const [groupedLocations, setGroupedLocations] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -76,8 +76,10 @@ const LocationCards = () => {
         }, {});
 
         setGroupedLocations(grouped);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching locations:', error);
+        setLoading(false);
       }
     };
 
@@ -92,38 +94,42 @@ const LocationCards = () => {
 
   return (
     <div className="py-8 bg-gray-100">
-      {Object.entries(groupedLocations).map(([type, locations]) => (
-        <div key={type} className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-            <span className="mr-2" role="img" aria-label={type}>
-              {type === 'Beach' ? '🏖️' :type === 'Temple' ? '🛕':type === 'Park' ? '⛲':type === 'Water park' ? '🎢': type === 'Mountain' ? '⛰️' : type === 'City' ? '🏙️' : '🍂'}
-            </span>
-            {type} Destinations
-          </h2>
-          <Carousel
-            responsive={responsive}
-            swipeable={true}
-            draggable={true}
-            showDots={false}
-            infinite={true}
-            autoPlay={true}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            customTransition="all .5s"
-            transitionDuration={500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"
-          >
-            {locations.map((location) => (
-              <div key={location._id} className="px-2">
-                <LocationCard location={location} />
-              </div>
-            ))}
-          </Carousel>
-        </div>
-      ))}
+      {loading ? (
+        <div className="text-center text-xl text-gray-600">Loading...</div>
+      ) : (
+        Object.entries(groupedLocations).map(([type, locations]) => (
+          <div key={type} className="mb-12">
+            <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+              <span className="mr-2" role="img" aria-label={type}>
+                {type === 'Beach' ? '🏖️' : type === 'Temple' ? '🛕' : type === 'Park' ? '⛲' : type === 'Water park' ? '🎢' : type === 'Mountain' ? '⛰️' : type === 'City' ? '🏙️' : '🍂'}
+              </span>
+              {type} Destinations
+            </h2>
+            <Carousel
+              responsive={responsive}
+              swipeable={true}
+              draggable={true}
+              showDots={false}
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={5000}
+              keyBoardControl={true}
+              customTransition="all .5s"
+              transitionDuration={500}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-40-px"
+            >
+              {locations.map((location) => (
+                <div key={location._id} className="px-2">
+                  <LocationCard location={location} />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        ))
+      )}
     </div>
   );
 };

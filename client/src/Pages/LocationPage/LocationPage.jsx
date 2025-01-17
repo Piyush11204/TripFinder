@@ -3,7 +3,9 @@ import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { Star, MapPin } from 'lucide-react';
+import { Star, MapPin, Share2 } from 'lucide-react';
+import SharePopup from './SharePopup.jsx';
+
 
 const LocationPage = () => {
   const location = useLocation();
@@ -12,6 +14,8 @@ const LocationPage = () => {
   const [mapHeight] = useState('400px');
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
+  const [showShare, setShowShare] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -50,6 +54,18 @@ const LocationPage = () => {
     tablet: { breakpoint: { max: 1024, min: 464 }, items: 2, slidesToSlide: 1 },
     mobile: { breakpoint: { max: 464, min: 0 }, items: 1, slidesToSlide: 1 }
   };
+  const handleShare = (platform) => {
+    const shareText = `Check out ${locationData.name}! Located near ${locationData.station}.`;
+    let url = '';
+    if (platform === 'facebook') {
+      url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+    } else if (platform === 'twitter') {
+      url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.href)}`;
+    } else if (platform === 'whatsapp') {
+      url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)} ${encodeURIComponent(window.location.href)}`;
+    }
+    window.open(url, '_blank');
+  }
 
   return (
     <div className="bg-purple-100 min-h-screen py-4">
@@ -65,7 +81,16 @@ const LocationPage = () => {
               alt={locationData.name}
               className="w-full h-64 object-cover rounded-lg shadow"
             />
-            <p className="text-gray-700"><span className="font-semibold">Description:</span> {locationData.description || 'No description available.'}</p>
+            <button
+              onClick={() => setShowShare(true)}
+              className="flex items-center z-auto gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              <Share2 size={20} />
+              Share
+            </button>
+            <p className="text-gray-700"><span className="text-2xl font-bold text-center text-purple-700 my-7">About this place:
+              <hr className='mb-5 border-2 border-purple-600' />
+            </span> {locationData.description || 'No description available.'}</p>
           </div>
 
           <div className="space-y-4">
@@ -82,7 +107,7 @@ const LocationPage = () => {
                 <p><span className="font-semibold">Review:</span> {locationData.additionalDetails}</p>
               )}
             </div>
-            
+
             <div className="bg-gray-50 p-3 rounded-lg">
               <h2 className="text-lg font-semibold mb-2">Location Map</h2>
               <iframe
@@ -102,7 +127,8 @@ const LocationPage = () => {
 
         {sameTypeLocations.length > 0 && (
           <div className="mt-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-3">Similar {locationData.locationType}s</h2>
+            <h2 className="text-2xl font-bold text-purple-700 my-3">Similar {locationData.locationType}s</h2>
+            <hr className='mb-5 border-2 border-purple-600' />
             <Carousel responsive={responsive} swipeable draggable infinite className="py-2">
               {sameTypeLocations.map((location) => (
                 <div key={location._id} className="mx-2">
@@ -164,6 +190,14 @@ const LocationPage = () => {
           </form>
         </div>
       </div>
+      <SharePopup
+                showShare={showShare}
+                setShowShare={setShowShare}
+                handleShare={handleShare}
+                copied={copied}
+                setCopied={setCopied}
+                locationData={locationData}
+              />
     </div>
   );
 };
