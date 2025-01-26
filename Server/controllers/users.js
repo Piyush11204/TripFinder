@@ -24,6 +24,8 @@ async function handleUpdateProfile(req, res) {
         user.firstName = req.body.firstName || user.firstName;
         user.lastName = req.body.lastName || user.lastName;
         user.email = req.body.email || user.email;
+        user.gender = req.body.gender || user.gender;
+        
 
         // If password is provided, hash it and update
         if (req.body.password) {
@@ -54,7 +56,13 @@ async function handleCreatingUser(req, res) {
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
         // Create and save new user
-        const newUser = new User({ ...req.body, password: hashedPassword });
+        const newUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hashedPassword,
+            gender: req.body.gender, // Include gender
+        });
         await newUser.save();
 
         // Generate auth token

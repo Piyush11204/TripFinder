@@ -8,7 +8,8 @@ const EditProfile = () => {
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        gender: '' // Add gender to the state
     });
     const [showPassword, setShowPassword] = useState(false);  // Toggle for password visibility
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -50,6 +51,7 @@ const EditProfile = () => {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            gender: user.gender // Include gender in the request
         };
 
         if (user.password) {
@@ -96,9 +98,7 @@ const EditProfile = () => {
                             onChange={handleInputChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 pl-10"
                             required
-                            
                         />
-                        
                     </div>
                     <div className="mb-4 relative">
                         <label htmlFor="lastName" className="block text-gray-700 font-bold mb-2">Last Name</label>
@@ -112,7 +112,6 @@ const EditProfile = () => {
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 pl-10"
                             required
                         />
-                        
                     </div>
                     <div className="mb-4 relative">
                         <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
@@ -126,7 +125,24 @@ const EditProfile = () => {
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 pl-10"
                             required
                         />
-                        
+                    </div>
+
+                    {/* Gender Dropdown */}
+                    <div className="mb-4 relative">
+                        <label htmlFor="gender" className="block text-gray-700 font-bold mb-2">Gender</label>
+                        <select
+                            id="gender"
+                            name="gender"
+                            value={user.gender}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100"
+                            required
+                        >
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
 
                     {/* Password Fields */}
@@ -141,13 +157,13 @@ const EditProfile = () => {
                             onChange={handleInputChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 pl-10"
                         />
-                        
                         <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
                             {showPassword ? <EyeOff className="text-gray-400 mt-7" /> : <Eye className="text-gray-400 mt-7" />}
                         </div>
                     </div>
                     <div className="mb-4 relative">
-                        <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2">Confirm New Password</label> <Lock className="absolute mt-3 left-3 text-gray-400 w-5 h-5" />
+                        <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2">Confirm New Password</label>
+                        <Lock className="absolute mt-3 left-3 text-gray-400 w-5 h-5" />
                         <input
                             type={showConfirmPassword ? "text" : "password"}
                             id="confirmPassword"
@@ -156,7 +172,6 @@ const EditProfile = () => {
                             onChange={handleInputChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 pl-10"
                         />
-                        
                         <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                             {showConfirmPassword ? <EyeOff className="text-gray-400 mt-7" /> : <Eye className="text-gray-400 mt-7" />}
                         </div>

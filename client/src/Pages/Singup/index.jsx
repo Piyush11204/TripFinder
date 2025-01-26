@@ -9,6 +9,7 @@ const Signup = () => {
 		lastName: "",
 		email: "",
 		password: "",
+		gender: "", // Add gender to the state
 	});
 	const [error, setError] = useState("");
 	const navigate = useNavigate();
@@ -67,6 +68,18 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
+						<select
+							name="gender"
+							onChange={handleChange}
+							value={data.gender}
+							required
+							className={styles.input}
+						>
+							<option value="">Select Gender</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+							<option value="other">Other</option>
+						</select>
 						<input
 							type="email"
 							placeholder="Email"
@@ -85,8 +98,9 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
+						
 						{error && <div className={styles.error_msg}>{error}</div>}
-						<button type="submit"  className={styles.green_btn}>
+						<button type="submit" className={styles.green_btn}>
 							Sign Up
 						</button>
 					</form>
